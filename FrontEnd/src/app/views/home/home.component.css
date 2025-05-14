@@ -1,0 +1,128 @@
+/* Reset básico para remover margens e paddings padrão dos elementos,
+   define box-sizing como border-box para incluir padding e borda nas dimensões,
+   e especifica a fonte padrão como Segoe UI ou sans-serif como fallback */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  /* Garante que html e body ocupem 100% da altura e largura da janela,
+     e impede rolagem (overflow: hidden) para manter o layout fixo */
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  /* Container principal que usa flexbox para organizar o layout,
+     ocupa toda a altura (100vh) e largura (100vw) da janela,
+     e impede rolagem interna */
+  .container {
+    display: flex;
+    height: 790px;
+    width: 1700px;
+    overflow: hidden;
+  }
+  
+  /* Estiliza o logotipo na sidebar com tamanho de fonte maior,
+     negrito e margem inferior para separação dos outros elementos */
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  /* Remove os marcadores padrão da lista de navegação na sidebar */
+  .sidebar nav ul {
+    list-style: none;
+  }
+  
+  /* Estiliza os links de navegação na sidebar com cor branca,
+     sem sublinhado padrão, margem vertical para espaçamento,
+     e exibição como bloco para ocupar toda a largura */
+  .sidebar nav a {
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    display: block;
+    font-size: 1.1rem;
+  }
+  
+  /* Adiciona sublinhado aos links da sidebar quando o mouse passa por cima (hover) */
+  .sidebar nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Estiliza o conteúdo principal, que ocupa o espaço restante (flex: 1),
+     com fundo bege claro, organização vertical via flexbox,
+     padding interno e rolagem automática caso o conteúdo exceda o espaço */
+  .main-content {
+    flex: 1;
+    background-color: #fef8f1;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    overflow: auto;
+  }
+  
+  /* Estiliza o cabeçalho com uma borda inferior marrom clara,
+     padding inferior para espaçamento e margem inferior para separação */
+  .header {
+    border-bottom: 2px solid #d4c1aa;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* Define o título do cabeçalho com cor marrom escura e tamanho de fonte grande */
+  .header h1 {
+    color: #3b2b23;
+    font-size: 2rem;
+  }
+  
+  /* Estiliza o parágrafo do cabeçalho com uma cor marrom intermediária */
+  .header p {
+    color: #5e4a3a;
+  }
+  
+  /* Organiza a seção de dashboard com flexbox, adicionando um espaço
+     de 20px entre os elementos filhos */
+  .dashboard {
+    display: flex;
+    gap: 20px;
+  }
+
+  .card {
+    background-color: white; /* Fundo branco para o card */
+    padding: 70px; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas (opcional) */
+    position: relative; /* Necessário para posicionamento relativo */
+    box-shadow: 4px 4px 0 0 #d4c1aa; /* Sombra que simula um quadrado deslocado */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 16px var(--card-shadow-hover);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 4px 4px 0 0 #d4c1aa; /* Sombra que simula um quadrado deslocado */
+  }
+
+  .card h2 {
+    position: relative;
+    right: 55px; /* Move 20px para a direita */
+    top: -55px; /* Move 10px para baixo */
+    font-size: 30px;
+  }
+
+  .card a {
+
+  }
+
+  /* Style the icon */ /* olhar dps isso */
+  a[mat-list-item] i.material-icons {
+    font-size: 50px;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }

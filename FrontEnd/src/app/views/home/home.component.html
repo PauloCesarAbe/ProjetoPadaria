@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Layout Semântico</title>
+</head>
+<body>
+  <div class="container">
+    
+    <main class="main-content">
+      <header class="header">
+        <h1>Bem-vindo ao Sistema de Gestões!</h1>
+        <p>Sistema de Gestão Paulo's Breads. </p>
+      </header>
+
+      <section class="dashboard" aria-label="Resumo de dados">
+        <article class="card">
+          <a mat-list-item routerLink="/products">
+            <i class="material-icons">storefront</i>
+            <h2>Produtos</h2>
+            <p>Dados importantes aqui</p>
+          </a>
+        </article>
+
+        <article class="card">
+          <a mat-list-item routerLink="/clientes">
+            <i class="material-icons">person</i>
+            <h2>Clientes</h2>
+            <p>Outras informações.</p>
+          </a>
+        </article>
+
+        <article class="card">
+          <a mat-list-item routerLink="/fornecedor">
+            <i class="material-icons">business</i> 
+            <h2>Fornecedores</h2>
+            <p>Mais detalhes.</p>
+          </a>
+        </article>
+
+        <article class="card">
+          <a mat-list-item routerLink="/contato">
+            <i class="material-icons">contacts</i> 
+            <h2>Contatos</h2>
+            <p>Mais detalhes.</p>
+          </a>
+        </article>
+
+        <article class="card">
+          <a mat-list-item routerLink="/formaPagamento">
+            <i class="material-icons">payments</i> 
+            <h2>Pagamentos</h2>
+            <p>Mais detalhes.</p>
+          </a>
+        </article>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
