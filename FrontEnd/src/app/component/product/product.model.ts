@@ -1,6 +1,15 @@
 export interface Product {
     proId?: number; // ID do produto (opcional)
     proNome: string; // Nome do produto
-    proPrecoCusto: number; // Preço de custo do produto
-    proPrecoVenda: number; // Preço de venda do produto
+    proDescricao: string;
+    proPrecoCusto: number | null; // Preço de custo do produto
+    proPrecoVenda: number | null; // Preço de venda do produto
+    proQuantidadeEstoque: number | null;
+    proCategoria: string;
+    proCodigoBarras: string;
+    proMarca: string;
+    proUnidadeMedida: string;
+    proAtivo: boolean;
+    proDataCadastro: string;
+    proDataAtualizacao: string;
 }

@@ -11,8 +11,17 @@ import { Router } from '@angular/router';
 export class ProductCreateComponent implements OnInit {
   product: Product = {
     proNome: '', // Nome do produto
-    proPrecoCusto: 0, // Preço de custo inicial
-    proPrecoVenda: 0, // Preço de venda inicial
+    proDescricao: '',
+    proPrecoCusto: null, // Preço de custo inicial
+    proPrecoVenda: null, // Preço de venda inicial
+    proQuantidadeEstoque:null,
+    proCategoria: '',
+    proCodigoBarras: '',
+    proMarca: '',
+    proUnidadeMedida: '',
+    proAtivo: true,
+    proDataCadastro: '',
+    proDataAtualizacao: '',
   };
 
   // Injeção de dependências: ProductService e Router

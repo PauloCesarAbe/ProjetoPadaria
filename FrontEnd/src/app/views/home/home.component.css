@@ -1,128 +1,127 @@
-/* Reset básico para remover margens e paddings padrão dos elementos,
-   define box-sizing como border-box para incluir padding e borda nas dimensões,
-   e especifica a fonte padrão como Segoe UI ou sans-serif como fallback */
-   * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
-  }
-  
-  /* Garante que html e body ocupem 100% da altura e largura da janela,
-     e impede rolagem (overflow: hidden) para manter o layout fixo */
-  html, body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  /* Container principal que usa flexbox para organizar o layout,
-     ocupa toda a altura (100vh) e largura (100vw) da janela,
-     e impede rolagem interna */
-  .container {
-    display: flex;
-    height: 790px;
-    width: 1700px;
-    overflow: hidden;
-  }
-  
-  /* Estiliza o logotipo na sidebar com tamanho de fonte maior,
-     negrito e margem inferior para separação dos outros elementos */
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-  }
-  
-  /* Remove os marcadores padrão da lista de navegação na sidebar */
-  .sidebar nav ul {
-    list-style: none;
-  }
-  
-  /* Estiliza os links de navegação na sidebar com cor branca,
-     sem sublinhado padrão, margem vertical para espaçamento,
-     e exibição como bloco para ocupar toda a largura */
-  .sidebar nav a {
-    color: white;
-    text-decoration: none;
-    margin: 10px 0;
-    display: block;
-    font-size: 1.1rem;
-  }
-  
-  /* Adiciona sublinhado aos links da sidebar quando o mouse passa por cima (hover) */
-  .sidebar nav a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Estiliza o conteúdo principal, que ocupa o espaço restante (flex: 1),
-     com fundo bege claro, organização vertical via flexbox,
-     padding interno e rolagem automática caso o conteúdo exceda o espaço */
-  .main-content {
-    flex: 1;
-    background-color: #fef8f1;
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    overflow: auto;
-  }
-  
-  /* Estiliza o cabeçalho com uma borda inferior marrom clara,
-     padding inferior para espaçamento e margem inferior para separação */
-  .header {
-    border-bottom: 2px solid #d4c1aa;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-  }
-  
-  /* Define o título do cabeçalho com cor marrom escura e tamanho de fonte grande */
-  .header h1 {
-    color: #3b2b23;
-    font-size: 2rem;
-  }
-  
-  /* Estiliza o parágrafo do cabeçalho com uma cor marrom intermediária */
-  .header p {
-    color: #5e4a3a;
-  }
-  
-  /* Organiza a seção de dashboard com flexbox, adicionando um espaço
-     de 20px entre os elementos filhos */
-  .dashboard {
-    display: flex;
-    gap: 20px;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
 
-  .card {
-    background-color: white; /* Fundo branco para o card */
-    padding: 70px; /* Espaçamento interno */
-    border-radius: 8px; /* Bordas arredondadas (opcional) */
-    position: relative; /* Necessário para posicionamento relativo */
-    box-shadow: 4px 4px 0 0 #d4c1aa; /* Sombra que simula um quadrado deslocado */
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-  }
+html, body {
+  height: 100%;
+  width: 100%;
+}
 
-  .card:hover {
-    box-shadow: 0 8px 16px var(--card-shadow-hover);
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 4px 4px 0 0 #d4c1aa; /* Sombra que simula um quadrado deslocado */
-  }
+.container {
+  display: flex;
+  height: 790px;
+  width: 1700px;
+  padding: 20px;
+  background: #fef8f1;
+  justify-content: center;
+  align-items: flex-start;
+}
 
-  .card h2 {
-    position: relative;
-    right: 55px; /* Move 20px para a direita */
-    top: -55px; /* Move 10px para baixo */
-    font-size: 30px;
-  }
+.sidebar nav a:hover {
+  text-decoration: underline;
+}
 
-  .card a {
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  overflow: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fef8f1;
 
-  }
+}
 
-  /* Style the icon */ /* olhar dps isso */
-  a[mat-list-item] i.material-icons {
-    font-size: 50px;
-    margin-right: 16px;
-    flex-shrink: 0;
-  }
+.header {
+  border-bottom: 2px solid #d4c1aa;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  color: #3b2b23;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: #5e4a3a;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.card {
+  background-color: white;
+  padding: 50px 40px;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 4px 4px 0 0 #d4c1aa;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  text-decoration: none; /* remove underline in case of a */
+  color: inherit;
+}
+
+/* Ajusta o hover com sombra e transformação */
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.05);
+}
+
+/* Força o link <a> dentro do card a ocupar todo o card e estilizar textos */
+.card > a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+}
+
+/* Ícone style */
+.material-icons {
+  font-size: 36px;
+  color: #3b2b23;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+}
+
+.card h2 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  position: static;
+  color: #3b2b23;
+}
+
+.card p {
+font-size: 0.95rem;
+color: #6b5b4b;
+margin: 0;
+}
+
+.counter {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #3b2b23;
+  margin-top: 10px;
+  display: block;
+}
