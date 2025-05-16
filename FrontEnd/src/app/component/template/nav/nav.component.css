@@ -7,6 +7,8 @@
 /* Estilo dos links na barra lateral */
 .sidenav a {
     color: #fff; /* Texto branco */
+    padding: 10px; /* Espaçamento interno */
+    text-decoration: none; /* Remove sublinhado */
 }
 
 /* Espaçamento entre ícones e texto nos links */
@@ -16,7 +18,7 @@
 
 /* Estilo do conteúdo principal */
 .content {
-    padding: 16px; /* Espaçamento interno */
+    padding: 14px; /* Espaçamento interno */
     background-color: #F5EBDD; /* Fundo branco */
 }
 

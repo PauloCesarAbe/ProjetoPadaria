@@ -37,4 +37,15 @@ export class FornecedorCreateComponent implements OnInit {
   cancel(): void {
     this.router.navigate(['/fornecedor']);
   }
+
+  //Contador Contato
+  private _contatoCount = 0;
+
+  setContatoCount(count: number) {
+  this._contatoCount = count;
+  }
+
+  getContatoCount(): number {
+  return this._contatoCount;
+  }
 }
