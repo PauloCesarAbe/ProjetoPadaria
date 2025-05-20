@@ -1,5 +1,6 @@
 <mat-card>
     <mat-card-title>Alterar Produto</mat-card-title>
+    <div class="scrollable-form">
     <form>
         <mat-form-field>
             <input matInput placeholder="Nome" [(ngModel)]="product.proNome" name="proNome">
@@ -65,5 +66,5 @@
     <button mat-raised-button (click)="cancel()">
         Cancelar
     </button>
-
+</div>
 </mat-card>

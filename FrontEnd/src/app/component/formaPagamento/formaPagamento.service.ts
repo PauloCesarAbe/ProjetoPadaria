@@ -49,5 +49,4 @@ export class formaPagamentoService {
         const url = `${this.baseUrl}/${id}`; // Concatena o ID à URL base
         return this.http.delete<FormaPagamento>(url);
     }
-
 }
