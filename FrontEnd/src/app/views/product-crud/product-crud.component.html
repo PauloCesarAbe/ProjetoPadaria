@@ -1,4 +1,16 @@
-<button mat-raised-button (click)="navigateToProductCreate()" color="primary">
-    Novo Produto
-</button>
-<app-product-read></app-product-read>
+<main>
+  <mat-card>
+    <button mat-raised-button (click)="navigateToProductCreate()" color="primary">
+        Novo Produto
+    </button>
+    
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="filterProducts()"
+      placeholder="Buscar produto..."
+    />
+    
+    <app-product-read [products]="filteredProducts"></app-product-read>
+  </mat-card>
+</main>

@@ -13,3 +13,8 @@ table {
 .delete > i {
     color: #e35e6b; /* Cor vermelha para o ícone de exclusão */
 }
+
+.scrollable-form {
+    max-height: 680px;
+    overflow-y: auto;
+}
