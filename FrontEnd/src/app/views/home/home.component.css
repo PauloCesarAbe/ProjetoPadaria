@@ -12,8 +12,6 @@ html, body {
 
 .container {
   display: flex;
-  height: 790px;
-  width: 1700px;
   padding: 20px;
   background: #fef8f1;
   justify-content: center;
