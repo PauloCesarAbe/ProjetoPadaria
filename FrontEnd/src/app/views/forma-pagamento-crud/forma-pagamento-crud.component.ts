@@ -1,21 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormaPagamento } from 'src/app/component/formaPagamento/formaPagamento.model';
+import { formaPagamentoService } from 'src/app/component/formaPagamento/formaPagamento.service';
 
 @Component({
-  selector: 'app-forma-pagamento-crud', // Define o seletor do componente
-  templateUrl: './forma-pagamento-crud.component.html', // Caminho para o template HTML
-  styleUrls: ['./forma-pagamento-crud.component.css'] // Caminho para o arquivo de estilos CSS
+  selector: 'app-forma-pagamento-crud',
+  templateUrl: './forma-pagamento-crud.component.html',
+  styleUrls: ['./forma-pagamento-crud.component.css']
 })
 export class FormaPagamentoCrudComponent implements OnInit {
-  // Construtor para injetar o serviço de roteamento
-  constructor(private router: Router) { }
+  searchTerm: string = '';
+  allFormasPagamento: FormaPagamento[] = [];
+  filteredFormasPagamento: FormaPagamento[] = [];
 
-  // Método chamado ao inicializar o componente
+  constructor(
+    private router: Router,
+    private formaPagamentoService: formaPagamentoService
+  ) {}
+
   ngOnInit(): void {
+    this.formaPagamentoService.read().subscribe(formas => {
+      this.allFormasPagamento = formas;
+      this.filteredFormasPagamento = formas;
+    });
   }
-  
-  // Método para navegar para a tela de criação de forma de pagamento
+
   navigateToFormaPagamentoCreate(): void {
     this.router.navigate(['/formaPagamento/create']);
+  }
+
+  filterFormasPagamento(): void {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredFormasPagamento = this.allFormasPagamento.filter(f =>
+      f.fpgDescricao.toLowerCase().includes(term)
+    );
   }
 }

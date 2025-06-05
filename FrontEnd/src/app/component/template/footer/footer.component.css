@@ -8,6 +8,8 @@
     /* Alinha o conteúdo no final da linha (lado direito) */
     justify-content: flex-end;
     background-color: #271910; /* Cor de fundo escura */
+    width: 100%; /* Para ocupar toda a largura da página */
+    padding: 10px 20px; /* Espaçamento interno para o conteúdo */
 }
 
 /* Estilo para o texto dentro do rodapé */
@@ -15,4 +17,21 @@
     font-size: 1.1rem; /* Tamanho da fonte */
     font-weight: 300; /* Peso da fonte leve */
     color: aliceblue; /* Cor do texto */
+    margin-right: 15px; /* Espaço entre o texto e o ícone */
+}
+
+/* Estilo para o ícone do LinkedIn */
+.linkedin-icon {
+    color: aliceblue;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    z-index: 1000;
+}
+
+/* Efeito de hover no ícone */
+.linkedin-icon:hover {
+    color: #7c573c;
+    transform: scale(1.2);
 }
