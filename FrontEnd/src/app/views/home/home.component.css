@@ -29,6 +29,7 @@ html, body {
   padding: 30px;
   overflow: auto;
   max-width: 1200px;
+  height: 80vh;
   margin: 0 auto;
   background: #fef8f1;
 
@@ -62,6 +63,7 @@ html, body {
 
 .card {
   background-color: white;
+  height: 30vh;
   padding: 50px 40px;
   border-radius: 8px;
   position: relative;
