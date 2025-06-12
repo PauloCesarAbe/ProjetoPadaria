@@ -1,8 +1,8 @@
 package org.example.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -13,26 +13,26 @@ public class Contato implements Serializable {
     @Column(name = "CON_ID")
     private Long conId;
 
-    @NotBlank(message = "Celular é orbigatório")
-    @Size(max = 14, message = "Celular inválido")
-    @Column(name = "CON_CELULAR", nullable = false, length = 14)
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "CON_CLI_ID")
+    private Cliente conCliente;
+
+    @Column(name = "CON_CELULAR", length = 14)
     private String conCelular;
 
-    @NotBlank(message = "Telefone comercial é obrigatório")
-    @Size(max = 14, message = "Telefone comercial inválido")
-    @Column(name = "CON_TELEFONE_COMERCIAL", nullable = false, length = 14)
+    @Column(name = "CON_TELEFONE_COMERCIAL", length = 14)
     private String conTelefoneComercial;
 
-    @NotBlank(message = "Email é obrigatório")
-    @Size(max = 100, message = "Email inválido")
-    @Column(nullable = false, length = 100, name = "CON_EMAIL")
+    @Column(length = 55, name = "CON_EMAIL")
     private String conEmail;
 
     public Contato() {
     }
 
-    public Contato(Long conId, String conCelular, String conTelefoneComercial, String conEmail) {
+    public Contato(Long conId, Cliente conCliente, String conCelular, String conTelefoneComercial, String conEmail) {
         this.conId = conId;
+        this.conCliente = conCliente;
         this.conCelular = conCelular;
         this.conTelefoneComercial = conTelefoneComercial;
         this.conEmail = conEmail;

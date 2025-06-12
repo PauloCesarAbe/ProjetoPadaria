@@ -14,40 +14,38 @@ public class FormaPagamento  implements Serializable {
     @Column(name = "FPG_ID")
     private Long fpgId;
 
-    @NotBlank(message = "Descrição é obrigatória")
-    @Size(message = "Descrição inválida")
-    @Column(name = "FPG_DESCRICAO", nullable = false)
+    @NotBlank(message = "Descrição é obrigatório!")
+    @Size(max = 200, message = "Descrição deve ter no máximo 200 caracteres!")
+    @Column(name = "FPG_DESCRICAO", length = 200, nullable = false)
     private String fpgDescricao;
 
-    @NotBlank(message = "Obrigatório")
-    @Size(message = "Inválido")
-    @Column(name = "FPG_ATIVO")
-    private String fpgAtivo;
+    @NotBlank(message = "Tipo é obrigatório!")
+    @Size(max = 50, message = "Tipo da Forma Pagamento deve ter no máximo 50 caracteres!")
+    @Column(name = "FPG_TIPO", length = 50, nullable = false)
+    private String fpgTipo;
 
-    @NotBlank(message = "Permite parcelamento é orbigatório")
-    @Size(message = "Inválido")
-    @Column(name = "FPG_PERMITE_PARCELAMENTO", nullable = false)
+    @NotBlank(message= "Permite Parcelamento é obrigatório")
+    @Column(name = "FPG_PERMITEPARCELAMENTO", nullable = false)
     private Boolean fpgPermiteParcelamento;
 
-    @NotBlank(message = "Obrigatório")
-    @Size(message = "Inválido")
-    @Column(name = "FPG_NUMERO_MAXIMO_PARCELAS", nullable = false)
-    private Integer fpgNumeroMaximoParcelas;
+    @NotBlank(message = "Numero Maximo de Parcelas é obrigatório")
+    @Column(name = "FPG_NUMMAXPARCELAS", nullable = false)
+    private Integer fpgNumMaxParcelas;
 
-    @NotBlank(message = "Obrigatório")
-    @Size(message = "Inválido")
-    @Column(name = "FPG_TAXA_ADICIONAL", nullable = false, precision = 5, scale = 2)
+    @NotBlank(message = "Taxa adicional é obrigatório")
+    @Column(name = "FPG_TAXAADICIONAL", nullable = false)
     private BigDecimal fpgTaxaAdicional;
+
 
     public FormaPagamento() {
     }
 
-    public FormaPagamento(Long fpgId, String fpgDescricao, String fpgAtivo, Boolean fpgPermiteParcelamento, Integer fpgNumeroMaximoParcelas,BigDecimal fpgTaxaAdicional) {
+    public FormaPagamento(Long fpgId, String fpgDescricao, String fpgTipo, Boolean fpgPermiteParcelamento, Integer fpgNumMaxParcelas, BigDecimal fpgTaxaAdicional) {
         this.fpgId = fpgId;
         this.fpgDescricao = fpgDescricao;
-        this.fpgAtivo = fpgAtivo;
+        this.fpgTipo = fpgTipo;
         this.fpgPermiteParcelamento = fpgPermiteParcelamento;
-        this.fpgNumeroMaximoParcelas = fpgNumeroMaximoParcelas;
+        this.fpgNumMaxParcelas = fpgNumMaxParcelas;
         this.fpgTaxaAdicional = fpgTaxaAdicional;
     }
 
@@ -67,12 +65,12 @@ public class FormaPagamento  implements Serializable {
         this.fpgDescricao = fpgDescricao;
     }
 
-    public String getFpgAtivo() {
-        return fpgAtivo;
+    public String getFpgTipo() {
+        return fpgTipo;
     }
 
-    public void setFpgAtivo(String fpgAtivo) {
-        this.fpgAtivo = fpgAtivo;
+    public void setFpgTipo(String fpgTipo) {
+        this.fpgTipo = fpgTipo;
     }
 
     public Boolean getFpgPermiteParcelamento() {
@@ -83,12 +81,12 @@ public class FormaPagamento  implements Serializable {
         this.fpgPermiteParcelamento = fpgPermiteParcelamento;
     }
 
-    public Integer getFpgNumeroMaximoParcelas() {
-        return fpgNumeroMaximoParcelas;
+    public Integer getFpgNumMaxParcelas() {
+        return fpgNumMaxParcelas;
     }
 
-    public void setFpgNumeroMaximoParcelas(Integer fpgNumeroMaximoParcelas) {
-        this.fpgNumeroMaximoParcelas = fpgNumeroMaximoParcelas;
+    public void setFpgNumMaxParcelas(Integer fpgNumMaxParcelas) {
+        this.fpgNumMaxParcelas = fpgNumMaxParcelas;
     }
 
     public BigDecimal getFpgTaxaAdicional() {

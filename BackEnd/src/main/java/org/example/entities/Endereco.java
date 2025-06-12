@@ -1,8 +1,8 @@
 package org.example.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -13,36 +13,32 @@ public class Endereco implements Serializable {
     @Column(name = "END_ID")
     private Long endId;
 
-    @NotBlank(message = "Rua é obrigatório")
-    @Size(max = 100, message = "Rua inválida")
-    @Column(name = "END_RUA", nullable = false, length = 100)
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "END_CLI_ID")
+    private Cliente endCliente;
+
+    @Column(name = "END_RUA")
     private String endRua;
 
-    @NotBlank(message = "Número é obrigatório")
-    @Size(max = 10, message = "Número inválido")
-    @Column(name = "END_NUMERO", nullable = false, length = 10)
+    @Column(name = "END_NUMERO")
     private String endNumero;
 
-    @NotBlank(message = "Cidade é obrigatória")
-    @Size(max = 100, message = "Cidade inválida")
-    @Column(name = "END_CIDADE", nullable = false, length = 100)
+    @Column(name = "END_CIDADE")
     private String endCidade;
 
-    @NotBlank(message = "CEP é obrigatório")
-    @Size(max = 8, message = "CEP inválido")
-    @Column(name = "END_CEP", nullable = false, length = 8)
+    @Column(name = "END_CEP", length = 8)
     private String endCep;
 
-    @NotBlank(message = "Estado é obrigatório")
-    @Size(max = 2, message = "Estado inválido")
     @Column(name = "END_ESTADO", length = 2)
     private String endEstado;
 
     public Endereco() {
     }
 
-    public Endereco(Long endId, String endRua, String endNumero, String endCidade, String endCep, String endEstado) {
+    public Endereco(Long endId, Cliente endCliente, String endRua, String endNumero, String endCidade, String endCep, String endEstado) {
         this.endId = endId;
+        this.endCliente = endCliente;
         this.endRua = endRua;
         this.endNumero = endNumero;
         this.endCidade = endCidade;

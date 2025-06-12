@@ -1,6 +1,7 @@
 package org.example.entities;
 
 import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,19 +18,20 @@ public class Fornecedor implements Serializable {
     @Column(name = "FOR_ID")
     private Long forId;
 
-    @NotBlank(message = "Nome fantasia é orbigatório")
-    @Size(max = 100, message = "Nome deve ter no máximo 100 caracteres")
-    @Column(name = "FOR_NOME_FANTASIA", nullable = false, length = 100)
+    @NotBlank(message = "Nome da Fantasia é obrigatório!")
+    @Size(max = 100, message = "Nome da Fantasia deve ter no máximo 100 caracteres!")
+    @Column(name = "FOR_NOME_FANTASIA", length = 100, nullable = false)
     private String forNomeFantasia;
 
-    @NotBlank(message = "CNPJ é obrigatório")
-    @CNPJ(message = "CNPJ inválido")
-    @Column(name = "FOR_CNPJ", nullable = false, unique = true, length = 18)
+    @NotBlank(message = "CNPJ é obrigatório!")
+    @CNPJ(message = "CNPJ inválido!")
+    @Size(max = 14, message = "CNPJ deve ter no máximo 14 caracteres!")
+    @Column(name = "FOR_CNPJ", unique = true, length = 14 , nullable = false)
     private String forCnpj;
 
-    @NotBlank(message = "Razão social é obrigatório")
-    @Size(max = 100, message = "Razão social deve ter no máximo 100 caracteres")
-    @Column(name = "FOR_RAZAO_SOCIAL", nullable = false, length = 100)
+    @NotBlank(message = "Razão Social é obrigatório!")
+    @Size(max = 100, message = "Razão Social deve ter no máximo 100 caracteres!")
+    @Column(name = "FOR_RAZAO_SOCIAL" ,length = 100 , nullable = false)
     private String forRazaoSocial;
 
     public Fornecedor() {
@@ -73,5 +75,4 @@ public class Fornecedor implements Serializable {
     public void setForRazaoSocial(String forRazaoSocial) {
         this.forRazaoSocial = forRazaoSocial;
     }
-
 }

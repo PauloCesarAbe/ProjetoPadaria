@@ -35,17 +35,16 @@ public class ProdutoService {
         if (optionalProduto.isPresent()) {
             Produto produtoSistema = optionalProduto.get();
             produtoSistema.setProNome(produto.getProNome());
-            produtoSistema.setProDescricao(produto.getProDescricao());
             produtoSistema.setProPrecoCusto(produto.getProPrecoCusto());
             produtoSistema.setProPrecoVenda(produto.getProPrecoVenda());
-            produtoSistema.setProQuantidadeEstoque(produto.getProQuantidadeEstoque());
-            produtoSistema.setProCategoria(produto.getProCategoria());
+            produtoSistema.setProQuantidade(produto.getProQuantidade());
+            produtoSistema.setProDescricao(produto.getProDescricao());
             produtoSistema.setProCodigoBarras(produto.getProCodigoBarras());
-            produtoSistema.setProMarca(produto.getProMarca());
-            produtoSistema.setProUnidadeMedida(produto.getProUnidadeMedida());
             produtoSistema.setProAtivo(produto.getProAtivo());
+            produtoSistema.setProMarca(produto.getProMarca());
+            produtoSistema.setProDataAtualizacao(produto.getProDataAtualizacao());
             produtoSistema.setProDataCadastro(produto.getProDataCadastro());
-            produtoSistema.setProDataCadastro(produto.getProDataCadastro());
+            produtoSistema.setProCategoria(produto.getProCategoria());
             repository.save(produtoSistema);
             return true;
         }
