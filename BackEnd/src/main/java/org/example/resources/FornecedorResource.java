@@ -53,5 +53,4 @@ public class FornecedorResource {
         fornecedorService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }

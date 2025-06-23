@@ -1,17 +1,15 @@
 package org.example.dto;
 
-public class ClienteDTO {
+public class FornecedorDto {
 
-    //cliente
-    private Long cliId;
-    private String cliNome;
-    private String cliCpf;
-    private String cliEmail;
-    private String cliTelefone;
-    private String cliEndereco;
-    private String endRua;
+    //fornecedor
+    private Long forId;
+    private String forNomeFantasia;
+    private String forCnpj;
+    private String forRazaoSocial;
 
     //endereco
+    private String endRua;
     private String endNumero;
     private String endCidade;
     private String endCep;
@@ -22,55 +20,41 @@ public class ClienteDTO {
     private String conTelefoneComercial;
     private String conEmail;
 
-    public ClienteDTO(){
+    //construtor
+    public FornecedorDto() {
     }
 
-    public Long getCliId() {
-        return cliId;
+    //getters e setter
+    public Long getForId() {
+        return forId;
     }
 
-    public void setCliId(Long cliId) {
-        this.cliId = cliId;
+    public void setForId(Long forId) {
+        this.forId = forId;
     }
 
-    public String getCliNome() {
-        return cliNome;
+    public String getForNomeFantasia() {
+        return forNomeFantasia;
     }
 
-    public void setCliNome(String cliNome) {
-        this.cliNome = cliNome;
+    public void setForNomeFantasia(String forNomeFantasia) {
+        this.forNomeFantasia = forNomeFantasia;
     }
 
-    public String getCliCpf() {
-        return cliCpf;
+    public String getForCnpj() {
+        return forCnpj;
     }
 
-    public void setCliCpf(String cliCpf) {
-        this.cliCpf = cliCpf;
+    public void setForCnpj(String forCnpj) {
+        this.forCnpj = forCnpj;
     }
 
-    public String getCliEmail() {
-        return cliEmail;
+    public String getForRazaoSocial() {
+        return forRazaoSocial;
     }
 
-    public void setCliEmail(String cliEmail) {
-        this.cliEmail = cliEmail;
-    }
-
-    public String getCliTelefone() {
-        return cliTelefone;
-    }
-
-    public void setCliTelefone(String cliTelefone) {
-        this.cliTelefone = cliTelefone;
-    }
-
-    public String getCliEndereco() {
-        return cliEndereco;
-    }
-
-    public void setCliEndereco(String cliEndereco) {
-        this.cliEndereco = cliEndereco;
+    public void setForRazaoSocial(String forRazaoSocial) {
+        this.forRazaoSocial = forRazaoSocial;
     }
 
     public String getEndRua() {
