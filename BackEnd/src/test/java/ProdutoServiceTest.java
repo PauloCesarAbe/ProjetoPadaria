@@ -31,14 +31,14 @@ public class ProdutoServiceTest {
 
         produto = new Produto(
                 1L,
-                "Bateria 60Ah",
-                "Bateria automotiva 60 amperes",
-                new BigDecimal("150.00"),
-                new BigDecimal("220.00"),
-                10,
-                "Elétrica",
-                "7891234567890",
-                "Moura",
+                "Pão Francês",
+                "Pão francês crocante e fresquinho",
+                new BigDecimal("0.50"),
+                new BigDecimal("0.80"),
+                500,
+                "Pães",
+                "7891000000001",
+                "Padaria Central",
                 "Unidade",
                 "Sim",
                 LocalDateTime.now(),
@@ -53,7 +53,7 @@ public class ProdutoServiceTest {
         Produto resultado = produtoService.findById(1L);
 
         assertNotNull(resultado);
-        assertEquals("Bateria 60Ah", resultado.getProNome());
+        assertEquals("Pão Francês", resultado.getProNome());
         verify(produtoRepository, times(1)).findById(1L);
     }
 
@@ -72,7 +72,7 @@ public class ProdutoServiceTest {
         Produto resultado = produtoService.insert(produto);
 
         assertNotNull(resultado);
-        assertEquals("Bateria 60Ah", resultado.getProNome());
+        assertEquals("Pão Francês", resultado.getProNome());
         verify(produtoRepository, times(1)).save(produto);
     }
 
@@ -80,14 +80,14 @@ public class ProdutoServiceTest {
     void testUpdateComSucesso() {
         Produto novoProduto = new Produto(
                 1L,
-                "Amortecedor Dianteiro",
-                "Amortecedor dianteiro esportivo",
-                new BigDecimal("100.00"),
-                new BigDecimal("180.00"),
+                "Bolo de Chocolate",
+                "Bolo de chocolate com cobertura cremosa",
+                new BigDecimal("10.00"),
+                new BigDecimal("15.00"),
                 20,
-                "Suspensão",
-                "7890000000001",
-                "Cofap",
+                "Bolos",
+                "7891000000002",
+                "Doce Vida",
                 "Unidade",
                 "Sim",
                 LocalDateTime.now(),
