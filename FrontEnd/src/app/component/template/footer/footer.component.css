@@ -1,20 +1,20 @@
 /* Estilo para o rodapé */
 .footer {
-    /* Define posição fixa para o rodapé */
     position: fixed;
-    /* Posiciona o rodapé na parte inferior da página */
     bottom: 0;
-    display: flex; /* Define layout flexível */
-    /* Alinha o conteúdo no final da linha (lado direito) */
+    display: flex;
     justify-content: flex-end;
-    background-color: #271910; /* Cor de fundo escura */
-    width: 100%; /* Para ocupar toda a largura da página */
-    padding: 10px 20px; /* Espaçamento interno para o conteúdo */
+    align-items: center; /*add*/
+    background-color: #271910;
+    /*width: 100%;*/
+    /*padding: 2% 5%;*/
+    padding: 0 20px;
+    z-index: 1000;
 }
 
 /* Estilo para o texto dentro do rodapé */
 .footer > span {
-    font-size: 1.1rem; /* Tamanho da fonte */
+    font-size: 90%; /* Tamanho da fonte */
     font-weight: 300; /* Peso da fonte leve */
     color: aliceblue; /* Cor do texto */
     margin-right: 15px; /* Espaço entre o texto e o ícone */

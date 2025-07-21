@@ -1,29 +1,64 @@
 /* Estilo do cabeçalho */
 .header {
-    display: flex; /* Define layout flexível */
-    align-items: center; /* Alinha itens verticalmente ao centro */
-    background-color: #291b12; /* Fundo preto */
+  display: flex;
+  align-items: center;
+  background-color: #291b12;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0 20px;
 }
 
-/* Estilo dos links no cabeçalho */
+/* Links no header */
 .header a {
-    display: flex; /* Define layout flexível */
-    align-items: center; /* Alinha itens verticalmente ao centro */
-    text-decoration: none; /* Remove sublinhado dos links */
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Estilo do logo no cabeçalho */
+/* Logo */
 .header .logo {
-    max-height: 65px; /* Define altura máxima do logo */
+  max-height: 65px;
 }
 
-/* Estilo do grupo de título no cabeçalho */
+/* Grupo de título */
 .header .title-group {
-    padding-left: 25px; /* Espaçamento à esquerda */
-    color: #F5EBDD; /* Cor do texto */
+  padding-left: 25px;
 }
 
-/* Estilo do ícone dentro do grupo de título */
-.header .title-group i {
-    padding-right: 5px; /* Espaçamento à direita do ícone */
+/* Link "Início" com animação */
+.header .inicio-link {
+  position: relative;
+  color: #F5EBDD;
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+/* Ícone do "Início" */
+.header .inicio-link i {
+  padding-right: 8px;
+  font-size: 22px;
+}
+
+/* Linha animada ao passar o mouse */
+.header .inicio-link::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #F5EBDD;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+/* Hover: linha aparece suavemente */
+.header .inicio-link:hover::after {
+  transform: scaleX(1);
 }

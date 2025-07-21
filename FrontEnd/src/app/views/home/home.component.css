@@ -9,14 +9,16 @@ html, body {
   height: 100%;
   width: 100%;
   font-size: 1vw;
+  overflow-x: hidden;
 }
 
 .container {
   display: flex;
-  padding: 2vh;
+  padding: 4vh;
   background: #fef8f1;
   justify-content: center;
   align-items: flex-start;
+  border-radius: 2vh;
 }
 
 .sidebar nav a:hover {
@@ -27,15 +29,16 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 3vh 2vw; /*add*/
-  overflow: auto;
-  max-width: 70%; /*add*/
-  height: 80vh; /*add*/
+  overflow-y: auto;      /* Permite apenas rolagem vertical se necessário */
+  overflow-x: hidden;    /* Evita rolagem horizontal ao dar hover */
+  max-width: 80%; 
   margin: 0 auto;
   background: #fef8f1;
+  height: 72vh; /* Expande mais para baixo ocupando 90% da altura da viewport */
+  padding: 0 1vw; /* <-- adiciona espaço invisível nas laterais para o "scale" caber */
 }
 
-.header { /*add*/
+.header {
   border-bottom: 0.3vh solid #d4c1aa;
   padding-bottom: 1.5vh;
   margin-bottom: 2vh;
@@ -57,14 +60,14 @@ html, body {
 .dashboard {
   display: flex;
   flex-wrap: wrap;
-  gap: 2vw;
+  gap: 1vw;
   justify-content: flex-start;
 }
 
 .card {
   background-color: white;
-  height: 28vh;
-  padding: 4vh 3vw;
+  height: 27vh;
+  padding: 2.2vh 2vw;
   border-radius: 1vh;
   position: relative;
   box-shadow: 0.5vh 0.5vh 0 0 #d4c1aa;
@@ -84,7 +87,7 @@ html, body {
 /* Ajusta o hover com sombra e transformação */
 .card:hover {
   box-shadow: 0 1.5vh 2vh rgba(0, 0, 0, 0.15);
-  transform: translateY(-8px) scale(1.05);
+  transform: translateY(-4px) scale(1.02); /* menos "zoom" e menos deslocamento */
 }
 
 /* Força o link <a> dentro do card a ocupar todo o card e estilizar textos */
@@ -107,9 +110,9 @@ html, body {
 }
 
 .card h2 {
-  font-size: 1.8em;
+  font-size: 1.9em;
   font-weight: 600;
-  margin: 0 0 12px 0;
+  margin: 0 0 1.2vh 0;
   position: static;
   color: #3b2b23;
 }
@@ -131,7 +134,7 @@ margin: 0;
 
 .icon-bg {
   position: absolute;
-  bottom: 5%;
+  bottom: -3%;
   right: 5%;
   font-size: clamp(3rem, 15vw, 10rem);;
   opacity: 0.07;
@@ -146,84 +149,4 @@ margin: 0;
   display: flex;
   flex-direction: column;
   gap: 1vh;
-}
-
-@media (max-width: 1024px) {
-  html, body {
-    font-size: 1.4vw;
-  }
-
-  .main-content {
-    max-width: 90%;
-    height: auto;
-    padding: 4vh 3vw;
-  }
-
-  .dashboard {
-    gap: 3vw;
-  }
-
-  .card {
-    flex: 1 1 45%; /* 2 cards por linha */
-  }
-
-  .material-icons {
-    font-size: 2.3em;
-  }
-
-  .card h2 {
-    font-size: 1.6em;
-  }
-
-  .card p,
-  .counter {
-    font-size: 1em;
-  }
-}
-
-/* Celulares (≤ 768px) */
-@media (max-width: 768px) {
-  html, body {
-    font-size: 2.5vw;
-  }
-
-  .container {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 2vh 1vw;
-  }
-
-  .main-content {
-    max-width: 100%;
-    height: auto;
-    padding: 3vh 2vw;
-  }
-
-  .dashboard {
-    flex-direction: column;
-    gap: 3vh;
-  }
-
-  .card {
-    flex: 1 1 100%;
-    height: auto;
-    padding: 4vh 4vw;
-  }
-
-  .material-icons {
-    font-size: 2em;
-  }
-
-  .card h2 {
-    font-size: 1.4em;
-  }
-
-  .card p,
-  .counter {
-    font-size: 1em;
-  }
-
-  .icon-bg {
-    font-size: 5rem;
-  }
 }

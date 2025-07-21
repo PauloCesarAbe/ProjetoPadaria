@@ -91,11 +91,9 @@ public class FornecedorService {
     }
 
     public Fornecedor fromDTO(FornecedorDto objDto) {
-        Fornecedor fornec = new Fornecedor(null, objDto.getForNomeFantasia(), objDto.getForRazaoSocial(), objDto.getForCnpj());
+        Fornecedor fornec = new Fornecedor(null, objDto.getForNomeFantasia(), objDto.getForCnpj(), objDto.getForRazaoSocial());
 
-        Endereco ender = new Endereco(null, fornec, objDto.getEndRua(), objDto.getEndNumero(),
-                objDto.getEndCidade(), objDto.getEndCep(),
-                objDto.getEndEstado());
+        Endereco ender = new Endereco(null, fornec, objDto.getEndRua(), objDto.getEndNumero(), objDto.getEndCidade(), objDto.getEndCep(), objDto.getEndEstado());
 
         Contato contato = new Contato(null, fornec, objDto.getConCelular(), objDto.getConTelefoneComercial(),
                 objDto.getConEmail());
@@ -116,19 +114,22 @@ public class FornecedorService {
         dto.setForCnpj(obj.getForCnpj());
 
 // Atributos específicos de Endereco
+    if (!obj.getEnderecos().isEmpty()) {
         Endereco endereco = obj.getEnderecos().get(0);
         dto.setEndRua(endereco.getEndRua());
         dto.setEndNumero(endereco.getEndNumero());
         dto.setEndCidade(endereco.getEndCidade());
         dto.setEndCep(endereco.getEndCep());
         dto.setEndEstado(endereco.getEndEstado());
+    }
 
 // Atributos específicos de Contato
+    if (!obj.getContatos().isEmpty()) {
         Contato contato = obj.getContatos().get(0);
         dto.setConCelular(contato.getConCelular());
         dto.setConTelefoneComercial(contato.getConTelefoneComercial());
         dto.setConEmail(contato.getConEmail());
-
+    }
         return dto;
     }
 }

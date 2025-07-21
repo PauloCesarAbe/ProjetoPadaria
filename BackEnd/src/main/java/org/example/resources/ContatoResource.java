@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping(value = "/contatos")
 public class ContatoResource {
 
-
     @Autowired
     private ContatoService contatoService;
 
@@ -25,7 +24,6 @@ public class ContatoResource {
         List<Contato> funcoes = contatoService.getAll();
         return ResponseEntity.ok(funcoes);
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Contato> findById(@PathVariable Long id) {
@@ -53,5 +51,4 @@ public class ContatoResource {
         contatoService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }

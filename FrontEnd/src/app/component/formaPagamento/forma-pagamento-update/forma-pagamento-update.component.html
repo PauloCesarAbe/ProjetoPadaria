@@ -14,10 +14,10 @@
 
     <!-- Campo de entrada para o status ativo -->
     <mat-form-field>
-        <mat-label>Ativo</mat-label>
         <mat-select
+            placeholder="Ativo"
             [(ngModel)]="formaPagamento.fpgAtivo"
-            name="fpgAtivo">
+            name="fpgAtivo" required>
             <mat-option [value]="true">Sim</mat-option>
             <mat-option [value]="false">Não</mat-option>
         </mat-select>
@@ -25,10 +25,10 @@
 
     <!-- Campo de entrada para permite parcelamento -->
     <mat-form-field>
-        <mat-label>Permite Parcelamento</mat-label>
         <mat-select
+            placeholder="Permite Parcelamento"
             [(ngModel)]="formaPagamento.fpgPermiteParcelamento"
-            name="fpgPermiteParcelamento">
+            name="fpgPermiteParcelamento" required>
             <mat-option [value]="true">Sim</mat-option>
             <mat-option [value]="false">Não</mat-option>
         </mat-select>
@@ -42,7 +42,7 @@
             placeholder="Número Máximo de Parcelas"
             [(ngModel)]="formaPagamento.fpgNumeroMaximoParcelas"
             name="fpgNumeroMaximoParcelas"
-            min="1">
+            min="1" required>
     </mat-form-field>
 
     <!-- Campo de entrada para taxa adicional -->
@@ -54,7 +54,7 @@
             [(ngModel)]="formaPagamento.fpgTaxaAdicional"
             name="fpgTaxaAdicional"
             step="0.01"
-            min="0">
+            min="0" required>
     </mat-form-field>
     </form>
 

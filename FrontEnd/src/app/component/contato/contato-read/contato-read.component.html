@@ -1,5 +1,7 @@
 <!-- Div com elevação de material design -->
 <div class="mat-elevation-z4">
+
+  <div class="scrollable-form">
   <!-- Tabela Angular Material com fonte de dados vinculada ao array "contato" -->
   <table mat-table [dataSource]="contatos">
     
@@ -47,4 +49,5 @@
     <!-- Linha de dados da tabela -->
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  </div>
 </div>

@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/fornecedores")
 public class FornecedorResource {
 
-
     @Autowired
     private FornecedorService service;
 

@@ -11,29 +11,47 @@ import { ClienteService } from '../cliente.service'; // Serviço para manipulaç
   styleUrls: ['./cliente-create.component.css'] // Caminho para o arquivo de estilos CSS do componente
 })
 export class ClienteCreateComponent implements OnInit {
-  // Objeto cliente inicializado com valores vazios
   cliente: Cliente = {
-    cliNome: '', // Nome do cliente
-    cliCpf: '', // CPF do cliente
-    cliEmail: '', // E-mail do cliente
-    cliTelefone: '', // Telefone do cliente
+    cliNome: '',
+    cliCpf: '',
+    conCelular: '',
+    conTelefoneComercial: '',
+    conEmail: '',
+    endRua: '',
+    endNumero: '',
+    endCidade: '',
+    endCep: '',
+    endEstado: ''
   };
-
   // Construtor que injeta o serviço ClienteService e o Router
   constructor(private clienteService: ClienteService,
-              private router: Router) { }
+    private router: Router) { }
 
   // Método chamado ao inicializar o componente
   ngOnInit(): void {
-    // Nenhuma lógica inicial necessária
   }
 
-  // Método para criar um novo cliente
+  submitted = false;
   createCliente(): void {
-    this.clienteService.create(this.cliente).subscribe(() => {
-      this.clienteService.showMessage('Cliente criado!'); // Exibe mensagem de sucesso
-      this.router.navigate(['/clientes']); // Navega para a lista de clientes
-    });
+    this.submitted = true; // Ativa a borda vermelha se não for preenchido
+    // Só envia se todos os campos estiverem preenchidos
+    if (
+      this.cliente.cliNome &&
+      this.cliente.cliCpf &&
+      this.cliente.conCelular &&
+      this.cliente.conTelefoneComercial &&
+      this.cliente.conEmail &&
+      this.cliente.endRua &&
+      this.cliente.endNumero &&
+      this.cliente.endCidade &&
+      this.cliente.endCep &&
+      this.cliente.endEstado
+    ) {
+      this.clienteService.createCliente(this.cliente).subscribe(() => {
+        this.clienteService.showMessage('Cliente criado!'); // Exibe mensagem de sucesso
+        this.router.navigate(['/clientes']); // Navega para a lista de clientes
+      });
+    }
   }
 
   // Método para cancelar a operação e voltar para a lista de clientes

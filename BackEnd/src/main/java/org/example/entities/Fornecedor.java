@@ -1,5 +1,6 @@
 package org.example.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
@@ -17,10 +18,14 @@ public class Fornecedor implements Serializable {
     @Column(name = "FOR_ID")
     private Long forId;
 
-    @OneToMany(mappedBy = "endCliente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Produto> produtos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "endFornecedor", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "conCliente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "conFornecedor", cascade = CascadeType.ALL)
     private List<Contato> contatos = new ArrayList<>();
 
     @NotBlank(message = "Nome Fantasia é obrigatório")

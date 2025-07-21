@@ -20,7 +20,7 @@ export class ClienteCrudComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.clienteService.read().subscribe(clientes => {
+    this.clienteService.readClientes().subscribe(clientes => {
       this.allClientes = clientes;
       this.filteredClientes = clientes;
     });
@@ -35,8 +35,9 @@ export class ClienteCrudComponent implements OnInit {
     this.filteredClientes = this.allClientes.filter(c =>
       c.cliNome.toLowerCase().includes(term) ||
       c.cliCpf.toLowerCase().includes(term) ||
-      c.cliEmail.toLowerCase().includes(term) ||
-      c.cliTelefone.toLowerCase().includes(term)
+      c.conEmail.toLowerCase().includes(term) ||
+      c.conCelular.toLowerCase().includes(term) ||
+      c.conTelefoneComercial.toLowerCase().includes(term)
     );
   }
 }

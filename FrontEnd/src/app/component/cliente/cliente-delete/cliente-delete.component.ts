@@ -18,16 +18,22 @@ export class ClienteDeleteComponent {
 
   ngOnInit(): void {
     const cliId = this.route.snapshot.paramMap.get('cliId');
-    this.clienteService.readById(cliId!).subscribe(cliente =>{
-      this.cliente = cliente
-    })
+    if (cliId) {
+      this.clienteService.readClienteById(cliId).subscribe((cliente: Cliente) => {
+        this.cliente = cliente;
+      });
+    } else {
+      this.router.navigate(['/clientes']);
+    }
   }
 
   deleteCliente(): void {
-    this.clienteService.delete(this.cliente.cliId!).subscribe(() =>{
-    this.clienteService.showMessage('Cliente excluido com sucesso!')  
-    this.router.navigate(['/clientes'])
-    })
+    if (this.cliente.cliId) {
+      this.clienteService.deleteCliente(this.cliente.cliId).subscribe(() => {
+        this.clienteService.showMessage('Cliente excluído com sucesso!');
+        this.router.navigate(['/clientes']);
+      });
+    }
   }
 
   cancel(): void{

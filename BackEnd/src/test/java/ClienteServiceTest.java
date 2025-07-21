@@ -19,9 +19,12 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class ClienteServiceTest {
+public class ClienteServiceTest {
 
     @InjectMocks
     private ClienteService clienteService;
@@ -39,11 +42,11 @@ class ClienteServiceTest {
         MockitoAnnotations.openMocks(this);
         cliente = new Cliente();
         cliente.setCliId(1L);
-        cliente.setCliNome("João Souza");
-        cliente.setCliCpf("00011122233");
+        cliente.setCliNome("Maria Silva");
+        cliente.setCliCpf("12334556789");
 
-        Endereco endereco = new Endereco(1L, cliente, "Rua Central", "101", "Cidade Alfa", "11111-111", "MG");
-        Contato contato = new Contato(1L, cliente, "90000-0001", "4002-8922", "joao@exemplo.com");
+        Endereco endereco = new Endereco(1L, cliente, "Rua A", "123", "Cidade", "12345-678", "PR");
+        Contato contato = new Contato(1L, cliente, "99999-9999", "3344-5566", "maria@gmail.com");
 
         cliente.setEnderecos(Arrays.asList(endereco));
         cliente.setContatos(Arrays.asList(contato));
@@ -56,7 +59,7 @@ class ClienteServiceTest {
         Cliente resultado = clienteService.findById(1L);
 
         assertNotNull(resultado);
-        assertEquals("João Souza", resultado.getCliNome());
+        assertEquals("Maria Silva", resultado.getCliNome());
     }
 
     @Test
@@ -69,41 +72,41 @@ class ClienteServiceTest {
     @Test
     void deveConverterDeDtoParaEntidade() {
         ClienteDto dto = new ClienteDto();
-        dto.setCliNome("Ana Ferreira");
-        dto.setCliCpf("99988877766");
-        dto.setEndRua("Rua Beta");
+        dto.setCliNome("Carlos");
+        dto.setCliCpf("12334556789");
+        dto.setEndRua("Rua B");
         dto.setEndNumero("456");
-        dto.setEndCidade("Cidade Beta");
-        dto.setEndCep("22222-222");
+        dto.setEndCidade("Cidade X");
+        dto.setEndCep("99999-000");
         dto.setEndEstado("SP");
-        dto.setConCelular("91111-2222");
-        dto.setConTelefoneComercial("3131-1313");
-        dto.setConEmail("ana@exemplo.com");
+        dto.setConCelular("98888-0000");
+        dto.setConTelefoneComercial("3131-3131");
+        dto.setConEmail("carlos@email.com");
 
         Cliente convertido = clienteService.fromDTO(dto);
 
-        assertEquals("Ana Ferreira", convertido.getCliNome());
-        assertEquals("Rua Beta", convertido.getEnderecos().get(0).getEndRua());
-        assertEquals("91111-2222", convertido.getContatos().get(0).getConCelular());
+        assertEquals("Carlos", convertido.getCliNome());
+        assertEquals("Rua B", convertido.getEnderecos().get(0).getEndRua());
+        assertEquals("98888-0000", convertido.getContatos().get(0).getConCelular());
     }
 
     @Test
     void deveConverterDeEntidadeParaDto() {
         ClienteDto dto = clienteService.toNewDto(cliente);
 
-        assertEquals("João Souza", dto.getCliNome());
-        assertEquals("Rua Central", dto.getEndRua());
-        assertEquals("90000-0001", dto.getConCelular());
+        assertEquals("Maria Silva", dto.getCliNome());
+        assertEquals("Rua A", dto.getEndRua());
+        assertEquals("99999-9999", dto.getConCelular());
     }
 
     @Test
-    void deveInserirClienteComSucesso() {
+    void deveInserirClienteComSucecsso() {
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
 
         Cliente resultado = clienteService.insert(cliente);
 
         assertNotNull(resultado);
-        assertEquals("João Souza", resultado.getCliNome());
+        assertEquals("Maria Silva", resultado.getCliNome());
         verify(clienteRepository, times(1)).save(any(Cliente.class));
         verify(enderecoRepository, times(1)).saveAll(cliente.getEnderecos());
     }
@@ -118,16 +121,16 @@ class ClienteServiceTest {
     @Test
     void deveAtualizarClienteComSucesso() {
         ClienteDto dto = new ClienteDto();
-        dto.setCliNome("Lucas Martins");
-        dto.setCliCpf("55544433322");
-        dto.setEndRua("Rua Nova Esperança");
+        dto.setCliNome("Carlos Silva");
+        dto.setCliCpf("98765432100");
+        dto.setEndRua("Rua Nova");
         dto.setEndNumero("999");
-        dto.setEndCidade("Cidade Gama");
-        dto.setEndCep("33333-333");
+        dto.setEndCidade("Cidade Nova");
+        dto.setEndCep("00000-000");
         dto.setEndEstado("RJ");
-        dto.setConCelular("92222-3333");
-        dto.setConTelefoneComercial("3222-3333");
-        dto.setConEmail("lucas@empresa.com");
+        dto.setConCelular("90000-0000");
+        dto.setConTelefoneComercial("5555-5555");
+        dto.setConEmail("carlos@novo.com");
 
         when(clienteRepository.findById(1L)).thenReturn(Optional.of(cliente));
         when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
@@ -135,9 +138,9 @@ class ClienteServiceTest {
         Cliente atualizado = clienteService.update(1L, dto);
 
         assertNotNull(atualizado);
-        assertEquals("Lucas Martins", atualizado.getCliNome());
-        assertEquals("Rua Nova Esperança", atualizado.getEnderecos().get(0).getEndRua());
-        assertEquals("92222-3333", atualizado.getContatos().get(0).getConCelular());
+        assertEquals("Carlos Silva", atualizado.getCliNome());
+        assertEquals("Rua Nova", atualizado.getEnderecos().get(0).getEndRua());
+        assertEquals("90000-0000", atualizado.getContatos().get(0).getConCelular());
     }
 
     @Test

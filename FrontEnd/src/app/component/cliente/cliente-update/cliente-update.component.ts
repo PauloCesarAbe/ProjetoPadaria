@@ -16,14 +16,20 @@ export class ClienteUpdateComponent {
     private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const cliId = this.route.snapshot.paramMap.get('cliId')
-    this.clienteService.readById(cliId!).subscribe((cliente: Cliente) =>{
-      this.cliente = cliente
-    })
+    const cliId = this.route.snapshot.paramMap.get('cliId');
+    if (cliId) {
+      this.clienteService.readClienteById(cliId).subscribe((cliente: Cliente) => {
+        this.cliente = cliente;
+      });
+    } else {
+      // Caso o cliId seja null, pode redirecionar ou mostrar erro
+      this.router.navigate(['/clientes']);
+    }
   }
 
   updateCliente(): void {
-    this.clienteService.update(this.cliente).subscribe(() => {
+    this.cliente.cliCpf = this.cliente.cliCpf.replace(/\D/g, ''); // remove pontos e traço
+    this.clienteService.updateCliente(this.cliente).subscribe(() => {
       this.clienteService.showMessage('Produto atualizado com sucesso!')
       this.router.navigate(['/clientes'])
     })

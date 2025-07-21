@@ -1,7 +1,5 @@
 package org.example.entities;
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -23,16 +21,14 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "conCliente", cascade = CascadeType.ALL)
     private List<Contato> contatos = new ArrayList<>();
 
-    @NotBlank(message = "Nome é obrigatório!")
-    @Size(max = 100, message = "Nome deve ter no máximo 100 caracteres!")
-    @Column(name = "CLI_NOME", nullable = false)
+    @NotBlank(message = "Nome é obrigatório")
+    @Size(max = 100, message = "Nome deve ter no máximo 100 caracteres")
+    @Column(name = "CLI_NOME", nullable = false, length = 100)
     private String cliNome;
 
-    @NotBlank(message = "Cpf é obrigatório!")
-    @CPF(message = "CPF inválido!")
-    @Column(name = "CLI_CPF", length = 11 , nullable = false, unique = true)
+    @NotBlank(message = "CPF é obrigatório")
+    @Column(name = "CLI_CPF", length = 11, nullable = false)
     private String cliCpf;
-
 
     public Cliente() {
     }
@@ -41,8 +37,6 @@ public class Cliente implements Serializable {
         this.cliId = cliId;
         this.cliNome = cliNome;
         this.cliCpf = cliCpf;
-
-
     }
 
     public Long getCliId() {
@@ -51,22 +45,6 @@ public class Cliente implements Serializable {
 
     public void setCliId(Long cliId) {
         this.cliId = cliId;
-    }
-
-    public String getCliNome() {
-        return cliNome;
-    }
-
-    public void setCliNome(String cliNome) {
-        this.cliNome = cliNome;
-    }
-
-    public String getCliCpf() {
-        return cliCpf;
-    }
-
-    public void setCliCpf(String cliCpf) {
-        this.cliCpf = cliCpf;
     }
 
     public List<Endereco> getEnderecos() {
@@ -83,5 +61,21 @@ public class Cliente implements Serializable {
 
     public void setContatos(List<Contato> contatos) {
         this.contatos = contatos;
+    }
+
+    public String getCliNome() {
+        return cliNome;
+    }
+
+    public void setCliNome(String cliNome) {
+        this.cliNome = cliNome;
+    }
+
+    public String getCliCpf() {
+        return cliCpf;
+    }
+
+    public void setCliCpf(String cliCpf) {
+        this.cliCpf = cliCpf;
     }
 }

@@ -1,4 +1,5 @@
 <main>
+  <div class="top-bar">
     <button mat-raised-button (click)="navigateToClienteCreate()" color="primary">
       Novo Cliente
     </button>
@@ -10,7 +11,8 @@
       placeholder="Buscar cliente..."
       class="pesquisa"
     />
-  
+    </div>
+    
     <app-cliente-read [clientes]="filteredClientes"></app-cliente-read>
   </main>
   

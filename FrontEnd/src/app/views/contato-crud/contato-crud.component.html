@@ -1,4 +1,5 @@
 <main>
+  <div class="top-bar">
     <button mat-raised-button (click)="navigateToContatoCreate()" color="primary">
       Novo Contato
     </button>
@@ -10,6 +11,7 @@
       placeholder="Buscar contato..."
       class="pesquisa"
     />
-  
+    </div>
+    
     <app-contato-read [contatos]="filteredContatos"></app-contato-read>
   </main>  

@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping(value = "/produtos")
 public class ProdutoResource {
 
-
     @Autowired
     private ProdutoService produtoService;
 
@@ -25,7 +24,6 @@ public class ProdutoResource {
         List<Produto> funcoes = produtoService.getAll();
         return ResponseEntity.ok(funcoes);
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Produto> findById(@PathVariable Long id) {
@@ -53,5 +51,4 @@ public class ProdutoResource {
         produtoService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }

@@ -31,16 +31,16 @@ public class ProdutoServiceTest {
 
         produto = new Produto(
                 1L,
-                "Pão Francês",
-                "Pão francês crocante e fresquinho",
-                new BigDecimal("0.50"),
-                new BigDecimal("0.80"),
-                500,
-                "Pães",
-                "7891000000001",
-                "Padaria Central",
+                "Bateria 60Ah",
+                "Bateria automotiva 60 amperes",
+                new BigDecimal("150.00"),
+                new BigDecimal("220.00"),
+                10,
+                "Elétrica",
+                "7891234567890",
+                "Moura",
                 "Unidade",
-                "Sim",
+                true,
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );
@@ -53,7 +53,7 @@ public class ProdutoServiceTest {
         Produto resultado = produtoService.findById(1L);
 
         assertNotNull(resultado);
-        assertEquals("Pão Francês", resultado.getProNome());
+        assertEquals("Bateria 60Ah", resultado.getProNome());
         verify(produtoRepository, times(1)).findById(1L);
     }
 
@@ -72,7 +72,7 @@ public class ProdutoServiceTest {
         Produto resultado = produtoService.insert(produto);
 
         assertNotNull(resultado);
-        assertEquals("Pão Francês", resultado.getProNome());
+        assertEquals("Bateria 60Ah", resultado.getProNome());
         verify(produtoRepository, times(1)).save(produto);
     }
 
@@ -80,16 +80,16 @@ public class ProdutoServiceTest {
     void testUpdateComSucesso() {
         Produto novoProduto = new Produto(
                 1L,
-                "Bolo de Chocolate",
-                "Bolo de chocolate com cobertura cremosa",
-                new BigDecimal("10.00"),
-                new BigDecimal("15.00"),
+                "Amortecedor Dianteiro",
+                "Amortecedor dianteiro esportivo",
+                new BigDecimal("100.00"),
+                new BigDecimal("180.00"),
                 20,
-                "Bolos",
-                "7891000000002",
-                "Doce Vida",
+                "Suspensão",
+                "7890000000001",
+                "Cofap",
                 "Unidade",
-                "Sim",
+                true,
                 LocalDateTime.now(),
                 LocalDateTime.now()
         );

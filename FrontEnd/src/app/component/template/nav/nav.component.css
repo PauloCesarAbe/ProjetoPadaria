@@ -5,6 +5,9 @@
     height: 100%; /* Para ocupar toda a altura */
     box-sizing: border-box;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3); /* Para dar uma leve sombra à barra lateral */
+    top: 60px; /* logo abaixo do header */
+    position: fixed; /* ou absolute */
+    z-index: 50;
 }
 
 /* Estilo dos links na barra lateral */

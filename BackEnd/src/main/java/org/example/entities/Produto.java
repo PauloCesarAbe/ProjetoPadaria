@@ -1,5 +1,7 @@
 package org.example.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -15,71 +17,52 @@ public class Produto implements Serializable {
     @Column(name = "PRO_ID")
     private Long proId;
 
-    @NotBlank(message = "Nome é obrigatório")
-    @Size(max = 100, message = "Nome inválido, máximo 100 caracterias")
-    @Column(name = "PRO_NOME", nullable = false, length = 100)
+    @ManyToOne
+    @JoinColumn(name = "for_id")
+    @JsonBackReference
+    private Fornecedor fornecedor;
+
+    @Column(name = "PRO_NOME")
     private String proNome;
 
-    @NotBlank(message = "Descrição é obrigatório")
-    @Size(max = 500, message = "Descrição inválido, máximo 100 caracterias")
-    @Column(name = "PRO_DESCRICAO", length = 500, nullable = false)
+    @Column(name = "PRO_DESCRICAO", length = 500)
     private String proDescricao;
 
-    @NotBlank(message = "Preço de custo é obrigatório")
-    @Size(message = "Inválido")
     @Column(name = "PRO_PRECO_CUSTO", precision = 10, scale = 2)
     private BigDecimal proPrecoCusto;
 
-    @NotBlank(message = "Preço de venda é obrigatório")
-    @Size(message = "Inválido")
-    @Column(name = "PRO_PRECO_VENDA", precision = 10, scale = 2, nullable = false)
+    @Column(name = "PRO_PRECO_VENDA", precision = 10, scale = 2)
     private BigDecimal proPrecoVenda;
 
-    @NotBlank(message = "Quantidade Estoque é obrigatório")
-    @Size(message = "Inválido")
-    @Column(name = "PRO_QUANTIDADE_ESTOQUE", nullable = false)
+    @Column(name = "PRO_QUANTIDADE_ESTOQUE")
     private Integer proQuantidadeEstoque;
 
-    @NotBlank(message = "Categoria é obrigatório")
-    @Size(max = 50, message = "Categoria inválida, máximo de 50 caracterias")
-    @Column(name = "PRO_CATEGORIA", nullable = false, length = 50)
+    @Column(name = "PRO_CATEGORIA")
     private String proCategoria;
 
-    @NotBlank(message = "Código de barras é obrigatório")
-    @Size(message = "Inválido")
-    @Column(name = "PRO_CODIGO_BARRAS", nullable = false)
+    @Column(name = "PRO_CODIGO_BARRAS")
     private String proCodigoBarras;
 
-    @NotBlank(message = "Marca é obrigatório")
-    @Size(max = 100, message = "Marca inválido, deve ter no máximo 100 caracteres")
-    @Column(name = "PRO_MARCA", nullable = false, length = 100)
+    @Column(name = "PRO_MARCA")
     private String proMarca;
 
-    @NotBlank(message = "Unidade de Medida é obrigatório")
-    @Size(max = 20, message = "Inválido")
-    @Column(name = "PRO_UNIDADE_MEDIDA", nullable = false,length = 20)
+    @Column(name = "PRO_UNIDADE_MEDIDA")
     private String proUnidadeMedida;
 
-    @NotBlank(message = "obrigatório")
-    @Size(message = "Inválido")
-    @Column(name = "PRO_ATIVO", nullable = false)
-    private String proAtivo;
+    @Column(name = "PRO_ATIVO")
+    private Boolean proAtivo;
 
-    @NotBlank(message = "Data de cadastro é obrigatório")
-    @Size(max = 10, message = "Data de cadastro inválido, deve ter no máximo 10 caracteres")
-    @Column(name = "PRO_DATA_CADASTRO",nullable = false, length = 10)
+    @Column(name = "PRO_DATA_CADASTRO")
     private LocalDateTime proDataCadastro;
 
-    @NotBlank(message = "Data de atualização é obrigatório")
-    @Size(max = 10, message = "Data de atualização iválido, deve ter no máximo 10 caracteres")
-    @Column(name = "PRO_DATA_ATUALIZACAO", nullable = false, length = 10)
+    @Column(name = "PRO_DATA_ATUALIZACAO")
     private LocalDateTime proDataAtualizacao;
 
     public Produto() {
     }
 
     // Construtor com todos os atributos pode ser adicionado aqui se necessário
-    public Produto(Long proId, String proNome, String proDescricao, BigDecimal proPrecoCusto, BigDecimal proPrecoVenda, Integer proQuantidadeEstoque, String proCategoria, String proCodigoBarras, String proMarca, String proUnidadeMedida, String proAtivo, LocalDateTime proDataCadastro, LocalDateTime proDataAtualizacao) {
+    public Produto(Long proId, String proNome, String proDescricao, BigDecimal proPrecoCusto, BigDecimal proPrecoVenda, Integer proQuantidadeEstoque, String proCategoria, String proCodigoBarras, String proMarca, String proUnidadeMedida, Boolean proAtivo, LocalDateTime proDataCadastro, LocalDateTime proDataAtualizacao) {
         this.proId = proId;
         this.proNome = proNome;
         this.proDescricao = proDescricao;
@@ -94,8 +77,8 @@ public class Produto implements Serializable {
         this.proDataCadastro = proDataCadastro;
         this.proDataAtualizacao = proDataAtualizacao;
     }
-    // Getters e Setters
 
+    //Getters e Setters
     public Long getProId() {
         return proId;
     }
@@ -176,11 +159,11 @@ public class Produto implements Serializable {
         this.proUnidadeMedida = proUnidadeMedida;
     }
 
-    public String getProAtivo() {
+    public Boolean getProAtivo() {
         return proAtivo;
     }
 
-    public void setProAtivo(String proAtivo) {
+    public void setProAtivo(Boolean proAtivo) {
         this.proAtivo = proAtivo;
     }
 

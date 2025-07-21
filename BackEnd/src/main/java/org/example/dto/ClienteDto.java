@@ -1,6 +1,5 @@
 package org.example.dto;
 
-
 import org.hibernate.validator.constraints.br.CPF;
 
 public class ClienteDto {
@@ -24,10 +23,11 @@ public class ClienteDto {
     private String conEmail;
 
     //construtor
+
     public ClienteDto() {
     }
 
-    //gatters e setters
+    //getters e setters
     public Long getCliId() {
         return cliId;
     }
