@@ -1,13 +1,11 @@
 package org.example.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Produto implements Serializable {
@@ -17,68 +15,71 @@ public class Produto implements Serializable {
     @Column(name = "PRO_ID")
     private Long proId;
 
-    @ManyToOne
-    @JoinColumn(name = "for_id")
-    @JsonBackReference
-    private Fornecedor fornecedor;
-
-    @Column(name = "PRO_NOME")
+    @NotBlank(message = "O nome do produto é obrigatório.")
+    @Size(max = 100, message = "O nome do produto deve ter no máximo 100 caracteres.")
+    @Column(name = "PRO_NOME", length = 100, nullable = false)
     private String proNome;
 
-    @Column(name = "PRO_DESCRICAO", length = 500)
+    @NotBlank(message = "A descrição do produto é obrigatória.")
+    @Size(max = 255, message = "A descrição do produto deve ter no máximo 255 caracteres.")
+    @Column(name = "PRO_DESCRICAO", length = 255, nullable = false)
     private String proDescricao;
 
-    @Column(name = "PRO_PRECO_CUSTO", precision = 10, scale = 2)
+    @NotNull(message = "O preço de custo é obrigatório.")
+    @Digits(integer = 10, fraction = 2, message = "O preço de custo deve ter no máximo 10 dígitos inteiros e 2 casas decimais.")
+    @Column(name = "PRO_PRECO_CUSTO", nullable = false, precision = 12, scale = 2)
     private BigDecimal proPrecoCusto;
 
-    @Column(name = "PRO_PRECO_VENDA", precision = 10, scale = 2)
+    @NotNull(message = "O preço de venda é obrigatório.")
+    @Digits(integer = 10, fraction = 2, message = "O preço de venda deve ter no máximo 10 dígitos inteiros e 2 casas decimais.")
+    @Column(name = "PRO_PRECO_VENDA", nullable = false, precision = 12, scale = 2)
     private BigDecimal proPrecoVenda;
 
-    @Column(name = "PRO_QUANTIDADE_ESTOQUE")
+    @NotNull(message = "A quantidade em estoque é obrigatória.")
+    @Min(value = 0, message = "A quantidade em estoque não pode ser negativa.")
+    @Column(name = "PRO_QUANTIDADE_ESTOQUE", nullable = false)
     private Integer proQuantidadeEstoque;
 
-    @Column(name = "PRO_CATEGORIA")
+    @NotBlank(message = "A categoria do produto é obrigatória.")
+    @Size(max = 50, message = "A categoria do produto deve ter no máximo 50 caracteres.")
+    @Column(name = "PRO_CATEGORIA", length = 50, nullable = false)
     private String proCategoria;
 
-    @Column(name = "PRO_CODIGO_BARRAS")
+    @NotBlank(message = "O código de barras do produto é obrigatório.")
+    @Size(max = 50, message = "O código de barras deve ter no máximo 50 caracteres.")
+    @Column(name = "PRO_CODIGO_BARRAS", length = 50, nullable = false, unique = true)
     private String proCodigoBarras;
 
-    @Column(name = "PRO_MARCA")
+    @NotBlank(message = "A marca do produto é obrigatória.")
+    @Size(max = 50, message = "A marca do produto deve ter no máximo 50 caracteres.")
+    @Column(name = "PRO_MARCA", length = 50, nullable = false)
     private String proMarca;
 
-    @Column(name = "PRO_UNIDADE_MEDIDA")
+    @NotBlank(message = "A unidade de medida do produto é obrigatória.")
+    @Size(max = 20, message = "A unidade de medida deve ter no máximo 20 caracteres.")
+    @Column(name = "PRO_UNIDADE_MEDIDA", length = 20, nullable = false)
     private String proUnidadeMedida;
 
-    @Column(name = "PRO_ATIVO")
-    private Boolean proAtivo;
+    @NotBlank(message = "O status de ativo do produto é obrigatório.")
+    @Pattern(regexp = "^(Ativo|Inativo)$", message = "O status do produto deve ser 'Ativo' ou 'Inativo'.")
+    @Column(name = "PRO_ATIVO", length = 5, nullable = false)
+    private String proAtivo;
 
-    @Column(name = "PRO_DATA_CADASTRO")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Column(name = "PRO_DATA_CADASTRO", nullable = false)
     private LocalDateTime proDataCadastro;
 
-    @Column(name = "PRO_DATA_ATUALIZACAO")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Column(name = "PRO_DATA_ATUALIZACAO", nullable = false)
     private LocalDateTime proDataAtualizacao;
 
-    public Produto() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "FOR_ID", nullable = false)
+    private Fornecedor fornecedor;
 
-    // Construtor com todos os atributos pode ser adicionado aqui se necessário
-    public Produto(Long proId, String proNome, String proDescricao, BigDecimal proPrecoCusto, BigDecimal proPrecoVenda, Integer proQuantidadeEstoque, String proCategoria, String proCodigoBarras, String proMarca, String proUnidadeMedida, Boolean proAtivo, LocalDateTime proDataCadastro, LocalDateTime proDataAtualizacao) {
-        this.proId = proId;
-        this.proNome = proNome;
-        this.proDescricao = proDescricao;
-        this.proPrecoCusto = proPrecoCusto;
-        this.proPrecoVenda = proPrecoVenda;
-        this.proQuantidadeEstoque = proQuantidadeEstoque;
-        this.proCategoria = proCategoria;
-        this.proCodigoBarras = proCodigoBarras;
-        this.proMarca = proMarca;
-        this.proUnidadeMedida = proUnidadeMedida;
-        this.proAtivo = proAtivo;
-        this.proDataCadastro = proDataCadastro;
-        this.proDataAtualizacao = proDataAtualizacao;
-    }
+    public Produto() {}
 
-    //Getters e Setters
+    // Getters e Setters
     public Long getProId() {
         return proId;
     }
@@ -159,11 +160,11 @@ public class Produto implements Serializable {
         this.proUnidadeMedida = proUnidadeMedida;
     }
 
-    public Boolean getProAtivo() {
+    public String getProAtivo() {
         return proAtivo;
     }
 
-    public void setProAtivo(Boolean proAtivo) {
+    public void setProAtivo(String proAtivo) {
         this.proAtivo = proAtivo;
     }
 
@@ -181,5 +182,13 @@ public class Produto implements Serializable {
 
     public void setProDataAtualizacao(LocalDateTime proDataAtualizacao) {
         this.proDataAtualizacao = proDataAtualizacao;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 }

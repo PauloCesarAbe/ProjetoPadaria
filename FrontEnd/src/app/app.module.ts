@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/template/header/header.component';
@@ -45,6 +46,9 @@ import { ContatoDeleteComponent } from './component/contato/contato-delete/conta
 import { MatSelectModule } from '@angular/material/select'; // Adicionado
 import { MatDatepickerModule } from '@angular/material/datepicker'; // Adicionado
 import { MatNativeDateModule } from '@angular/material/core'; // Adicionado
+import { VendaCreateComponent } from './component/venda/venda-create/venda-create.component';
+import { VendaCrudComponent } from './views/venda-crud/venda-crud.component';
+import { VendaReadComponent } from './component/venda/venda-read/venda-read.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +82,9 @@ import { MatNativeDateModule } from '@angular/material/core'; // Adicionado
     FormaPagamentoDeleteComponent,
     ContatoUpdateComponent,
     ContatoDeleteComponent,
+    VendaCreateComponent,
+    VendaCrudComponent,
+    VendaReadComponent
     
   ],
   imports: [
@@ -96,7 +103,8 @@ import { MatNativeDateModule } from '@angular/material/core'; // Adicionado
     MatTableModule,
     MatSelectModule,               // Adicionado
     MatDatepickerModule,           // Adicionado
-    MatNativeDateModule           // Adicionado
+    MatNativeDateModule,          // Adicionado
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

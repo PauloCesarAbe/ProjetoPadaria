@@ -29,21 +29,20 @@ public class ProdutoServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        produto = new Produto(
-                1L,
-                "Bateria 60Ah",
-                "Bateria automotiva 60 amperes",
-                new BigDecimal("150.00"),
-                new BigDecimal("220.00"),
-                10,
-                "Elétrica",
-                "7891234567890",
-                "Moura",
-                "Unidade",
-                true,
-                LocalDateTime.now(),
-                LocalDateTime.now()
-        );
+        produto = new Produto();
+        produto.setProId(1L);
+        produto.setProNome("Bateria 60Ah");
+        produto.setProDescricao("Bateria automotiva 60 amperes");
+        produto.setProPrecoCusto(new BigDecimal("150.00"));
+        produto.setProPrecoVenda(new BigDecimal("220.00"));
+        produto.setProQuantidadeEstoque(10);
+        produto.setProCategoria("Elétrica");
+        produto.setProCodigoBarras("7891234567890");
+        produto.setProMarca("Moura");
+        produto.setProUnidadeMedida("Unidade");
+        produto.setProAtivo("Ativo"); // String, não boolean
+        produto.setProDataCadastro(LocalDateTime.now());
+        produto.setProDataAtualizacao(LocalDateTime.now());
     }
 
     @Test
@@ -78,21 +77,20 @@ public class ProdutoServiceTest {
 
     @Test
     void testUpdateComSucesso() {
-        Produto novoProduto = new Produto(
-                1L,
-                "Amortecedor Dianteiro",
-                "Amortecedor dianteiro esportivo",
-                new BigDecimal("100.00"),
-                new BigDecimal("180.00"),
-                20,
-                "Suspensão",
-                "7890000000001",
-                "Cofap",
-                "Unidade",
-                true,
-                LocalDateTime.now(),
-                LocalDateTime.now()
-        );
+        Produto novoProduto = new Produto();
+        novoProduto.setProId(1L);
+        novoProduto.setProNome("Amortecedor Dianteiro");
+        novoProduto.setProDescricao("Amortecedor dianteiro esportivo");
+        novoProduto.setProPrecoCusto(new BigDecimal("100.00"));
+        novoProduto.setProPrecoVenda(new BigDecimal("180.00"));
+        novoProduto.setProQuantidadeEstoque(20);
+        novoProduto.setProCategoria("Suspensão");
+        novoProduto.setProCodigoBarras("7890000000001");
+        novoProduto.setProMarca("Cofap");
+        novoProduto.setProUnidadeMedida("Unidade");
+        novoProduto.setProAtivo("Ativo");
+        novoProduto.setProDataCadastro(LocalDateTime.now());
+        novoProduto.setProDataAtualizacao(LocalDateTime.now());
 
         when(produtoRepository.findById(1L)).thenReturn(Optional.of(produto));
         when(produtoRepository.save(any(Produto.class))).thenReturn(novoProduto);

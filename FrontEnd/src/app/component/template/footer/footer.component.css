@@ -1,37 +1,35 @@
-/* Estilo para o rodapé */
 .footer {
-    position: fixed;
-    bottom: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center; /*add*/
-    background-color: #271910;
-    /*width: 100%;*/
-    /*padding: 2% 5%;*/
-    padding: 0 20px;
-    z-index: 1000;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #271910;
+  padding: 0 20px;
+  z-index: 1000;
+  width: 100%;
+  gap: 20px; /* novo: espaçamento igual entre itens */
 }
 
 /* Estilo para o texto dentro do rodapé */
 .footer > span {
-    font-size: 90%; /* Tamanho da fonte */
-    font-weight: 300; /* Peso da fonte leve */
-    color: aliceblue; /* Cor do texto */
-    margin-right: 15px; /* Espaço entre o texto e o ícone */
+  font-size: 90%;
+  font-weight: 300;
+  color: aliceblue;
 }
 
-/* Estilo para o ícone do LinkedIn */
+/* Estilo para os ícones */
+.github-icon,
 .linkedin-icon {
-    color: aliceblue;
-    font-size: 1.5rem;
-    text-decoration: none;
-    transition: color 0.3s ease, transform 0.3s ease;
-    display: inline-block;
-    z-index: 1000;
+  color: aliceblue;
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Efeito de hover no ícone */
+.github-icon:hover,
 .linkedin-icon:hover {
-    color: #7c573c;
-    transform: scale(1.2);
+  color: #7c573c;
+  transform: scale(1.2);
 }

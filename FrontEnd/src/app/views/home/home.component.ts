@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/component/product/product.service';
 import { ClienteService } from 'src/app/component/cliente/cliente.service';
 import { contatoService } from 'src/app/component/contato/contato.service';
 import { formaPagamentoService } from 'src/app/component/formaPagamento/formaPagamento.service';
+import { VendaService } from 'src/app/component/venda/venda.service';
 import { FornecedorService } from 'src/app/component/fornecedor/fornecedor.service';
 
 
@@ -18,11 +19,13 @@ export class HomeComponent implements OnInit{
   constructor(public productService: ProductService,
               public clienteService: ClienteService, 
               public contatoService: contatoService,
+              public vendaService: VendaService,
               public formaPagamentoService: formaPagamentoService,
               public fornecedorService: FornecedorService){}
   productCount: number = 0;
   clienteCount: number = 0;
   contatoCount: number = 0;
+  vendaCount: number = 0;
   formaPagamentoCount: number = 0;
   fornecedorCount: number = 0;
 
@@ -44,6 +47,10 @@ export class HomeComponent implements OnInit{
   this.formaPagamentoService.read().subscribe(formaPagamento => {
       this.formaPagamentoCount = formaPagamento.length; // Conta a quantidade de formas de pagamentos
     const count = this.formaPagamentoService.getFormaPagamentoCount();
+  });
+  this.vendaService.read().subscribe(venda => {
+      this.vendaCount = venda.length; // Conta a quantidade de vendas
+    const count = this.vendaService.getVendaCount();
   });
   this.fornecedorService.readFornecedor().subscribe(fornecedor => {
       this.fornecedorCount = fornecedor.length; // Conta a quantidade de formas de pagamentos

@@ -1,0 +1,94 @@
+.mat-elevation-z4 {
+  background: #2c3e50;
+  border-radius: 16px;
+  margin: 30px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  color: white;
+  margin-bottom: 16px;
+  margin-left: 18px;
+}
+
+.sales-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.scrollable-form {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: auto;
+
+}
+
+.sale-card-wrapper {
+  margin: 15px;
+  display: inline-flex;
+  
+}
+
+.sale-card {
+  background-color: #f4a261;
+  border-radius: 15px;
+  padding: 12px 18px;
+  max-width: 300px;
+  align-items: start;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.sale-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.sale-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.border-right {
+  border-right: 3px solid #e76f51;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.value {
+  font-size: 18px;
+}
+
+.code {
+  font-size: 24px;
+}
+
+.info-icon {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.info-icon mat-icon {
+  font-size: 25px;
+}
+
+.sale-card:hover{
+    box-shadow: 0px 5px 20px #f4a261;
+    transition: 0.2s;
+    transform: scale(1.01);
+}

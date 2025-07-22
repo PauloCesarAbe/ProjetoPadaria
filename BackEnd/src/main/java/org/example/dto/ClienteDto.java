@@ -23,7 +23,6 @@ public class ClienteDto {
     private String conEmail;
 
     //construtor
-
     public ClienteDto() {
     }
 
