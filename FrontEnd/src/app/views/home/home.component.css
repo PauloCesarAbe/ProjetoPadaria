@@ -14,7 +14,7 @@ html, body {
 
 .container {
   display: flex;
-  padding: 4vh;
+  padding: 6vh;
   background: #fef8f1;
   justify-content: center;
   align-items: flex-start;
@@ -34,7 +34,7 @@ html, body {
   max-width: 80%; 
   margin: 0 auto;
   background: #fef8f1;
-  height: 72vh; /* Expande mais para baixo ocupando 90% da altura da viewport */
+  height: 73vh; /* Expande mais para baixo ocupando 90% da altura da viewport */
   padding: 0 1vw; /* <-- adiciona espaço invisível nas laterais para o "scale" caber */
 }
 
@@ -46,7 +46,7 @@ html, body {
 
 .header h1 {
   color: #3b2b23;
-  font-size: 2.2em;
+  font-size: 2em;
   font-weight: 700;
   margin-bottom: 0.5vh;
 }

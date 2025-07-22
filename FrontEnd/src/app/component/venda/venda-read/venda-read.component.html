@@ -1,22 +1,21 @@
 <div class="mat-elevation-z4">
-  <h3 class="title">Vendas:</h3>
-  <div class="sales-list">
-    <div *ngFor="let sale of vendas" class="sale-card-wrapper">
-      <mat-card class="sale-card">
-        <div class="sale-content">
-          <div class="sale-item border-right">
-            <span class="label">cliId:</span>
-            <span class="value">{{ sale.cliId }}</span>
-          </div>
-          <div class="sale-item">
-            <span class="label">Código:</span>
-            <span class="value code">{{ sale.vendaCodigo }}</span>
-          </div>
-          <a routerLink="/" class="info-icon">
-                    <i class="material-icons">info</i>
-                </a>
-        </div>
-      </mat-card>
-    </div>
+  <div class="scrollable-form">
+    <table mat-table [dataSource]="vendas">
+
+      <!-- cliId Column -->
+      <ng-container matColumnDef="cliId">
+        <th mat-header-cell *matHeaderCellDef>Cliente ID</th>
+        <td mat-cell *matCellDef="let row">{{row.cliId}}</td>
+      </ng-container>
+
+      <!-- vendaCodigo Column -->
+      <ng-container matColumnDef="vendaCodigo">
+        <th mat-header-cell *matHeaderCellDef>Código</th>
+        <td mat-cell *matCellDef="let row">{{row.vendaCodigo}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
   </div>
 </div>

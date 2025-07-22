@@ -1,13 +1,14 @@
 /* Card com altura máxima e rolagem interna */
 mat-card.venda-card {
-  width: 100%;
-  max-width: 830px;
-  max-height: 75vh; /* altura máxima relativa à viewport */
-  padding: 30px;
+  width: 90%;               /* Alterado de 100% para 90% para ocupar a maior parte da tela, mas com margem lateral */
+  max-width: 900px;         /* Aumentado de 830px para 900px para telas grandes, limita o tamanho máximo */
+  min-width: 320px;         /* Novo: impede que o card fique muito estreito em telas pequenas (ex: celular) */
+  max-height: 75vh;         /* Mantido: limita altura a 75% da viewport para evitar overflow vertical */
+  padding: 3rem;            /* Alterado de 30px para 2rem para usar unidades relativas que escalam melhor */
   background-color: #fff;
   border-radius: 14px;
   box-shadow: 0 10px 22px rgba(92, 58, 26, 0.6);
-  margin: 5px auto 30px auto;
+  margin: 1.5rem auto 2rem auto; /* Margem vertical em rem para escalabilidade e centralização horizontal */
   display: flex;
   flex-direction: column;
 }
@@ -122,12 +123,28 @@ button.mat-raised-button:hover {
   gap: 15px;
 }
 
-/* Responsividade para telas menores */
+/* Responsividade para telas médias e pequenas */
+
+/* Ajusta max-width do card para telas até 1200px */
+@media (max-width: 1200px) {
+  mat-card.venda-card {
+    max-width: 700px; /* Diminui o max-width para se adaptar melhor em telas menores */
+  }
+}
+
+/* Ajustes para telas pequenas até 768px (tablets, celulares maiores) */
 @media (max-width: 768px) {
+  mat-card.venda-card {
+    width: 95%;      /* Aumenta a largura para 95% para melhor aproveitamento da tela pequena */
+    padding: 1.5rem; /* Diminui o padding para não ficar muito espaçado */
+  }
+
+  /* Cada campo do formulário ocupa 100% da largura */
   .form-columns mat-form-field {
     flex: 1 1 100%;
   }
 
+  /* Botões finais empilhados verticalmente com espaçamento */
   .botoes-finais {
     flex-direction: column;
     gap: 10px;

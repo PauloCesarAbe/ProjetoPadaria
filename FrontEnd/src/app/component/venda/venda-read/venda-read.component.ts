@@ -19,6 +19,8 @@ export class VendaReadComponent {
     this.loadVendas();
   }
 
+  displayedColumns = ['cliId', 'vendaCodigo'];
+
   loadVendas(): void{
     this.vendaService.read().subscribe({
       next: (data) => this.vendas = data,
