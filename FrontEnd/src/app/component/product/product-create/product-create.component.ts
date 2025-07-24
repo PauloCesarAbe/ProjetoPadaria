@@ -12,16 +12,17 @@ export class ProductCreateComponent implements OnInit {
   product: Product = {
     proNome: '', // Nome do produto
     proDescricao: '',
-    proPrecoCusto: null, // Preço de custo inicial
-    proPrecoVenda: null, // Preço de venda inicial
-    proQuantidadeEstoque:null,
+    proPrecoCusto: 0, // Preço de custo inicial
+    proPrecoVenda: 0, // Preço de venda inicial
+    proQuantidadeEstoque: 0,
     proCategoria: '',
     proCodigoBarras: '',
     proMarca: '',
     proUnidadeMedida: '',
-    proAtivo: true,
-    proDataCadastro: '',
-    proDataAtualizacao: '',
+    proAtivo: 'Ativo',
+    proDataCadastro: new Date().toISOString(),
+    proDataAtualizacao: new Date().toISOString(),
+    forId: 0
   };
 
   // Injeção de dependências: ProductService e Router

@@ -17,38 +17,38 @@ import java.util.List;
 public class FormaPagamentoResource {
 
     @Autowired
-    private FormaPagamentoService formaPagamentoService;
+    private FormaPagamentoService service;
 
     @GetMapping
-    public ResponseEntity<List<FormaPagamento>> getAll() {
-        List<FormaPagamento> funcoes = formaPagamentoService.getAll();
-        return ResponseEntity.ok(funcoes);
+    public ResponseEntity<List<FormaPagamento>> findAll(){
+        List<FormaPagamento> list = service.getAll();
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FormaPagamento> findById(@PathVariable Long id) {
-        FormaPagamento obj = formaPagamentoService.findById(id);
+    public ResponseEntity<FormaPagamento> findById(@PathVariable Long id){
+        FormaPagamento obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<FormaPagamento> insert(@RequestBody FormaPagamento formaPagamento) {
-        FormaPagamento createdFormaPagamento = formaPagamentoService.insert(formaPagamento);
+    public ResponseEntity<FormaPagamento> insert(@RequestBody FormaPagamento formaPagamento){
+        FormaPagamento createdFormaPagamento = service.insert(formaPagamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdFormaPagamento);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody FormaPagamento formaPagamento) {
-        if (formaPagamentoService.update(id, formaPagamento)) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody FormaPagamento formaPagamento){
+        if(service.update(id, formaPagamento)) {
             return ResponseEntity.ok().build();
-        } else {
+        } else{
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        formaPagamentoService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormaPagamento } from 'src/app/component/formaPagamento/formaPagamento.model';
-import { formaPagamentoService } from 'src/app/component/formaPagamento/formaPagamento.service';
+import { FormaPagamentoService } from 'src/app/component/formaPagamento/formaPagamento.service';
 
 @Component({
   selector: 'app-forma-pagamento-crud',
@@ -15,7 +15,7 @@ export class FormaPagamentoCrudComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private formaPagamentoService: formaPagamentoService
+    private formaPagamentoService: FormaPagamentoService
   ) {}
 
   ngOnInit(): void {

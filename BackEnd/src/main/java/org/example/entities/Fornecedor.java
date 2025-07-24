@@ -19,7 +19,6 @@ public class Fornecedor implements Serializable {
     private Long forId;
 
     @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Produto> produtos = new ArrayList<>();
 
     @OneToMany(mappedBy = "endFornecedor", cascade = CascadeType.ALL)
@@ -46,7 +45,7 @@ public class Fornecedor implements Serializable {
     public Fornecedor() {
     }
 
-    public Fornecedor(Object o, String forNomeFantasia, String forCnpj, String forRazaoSocial) {
+    public Fornecedor(Long forId, String forNomeFantasia, String forCnpj, String forRazaoSocial) {
         this.forId = forId;
         this.forNomeFantasia = forNomeFantasia;
         this.forCnpj = forCnpj;

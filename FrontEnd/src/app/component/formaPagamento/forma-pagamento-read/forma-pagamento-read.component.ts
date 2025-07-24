@@ -11,5 +11,12 @@ export class FormaPagamentoReadComponent {
   @Input() formasPagamento: FormaPagamento[] = [];
 
   // Colunas da tabela
-  displayedColumns = ['fpgId', 'fpgDescricao', 'action'];
+  displayedColumns = [
+  'fpgId',
+  'fpgTipo',
+  'fpgPermiteParcelamento',
+  'fpgNumMaxParcelas',
+  'fpgTaxaAdicional',
+  'action'
+  ];
 }

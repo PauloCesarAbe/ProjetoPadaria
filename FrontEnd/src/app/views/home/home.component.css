@@ -14,7 +14,7 @@ html, body {
 
 .container {
   display: flex;
-  padding: 6vh;
+  padding: 2.5vh;
   background: #fef8f1;
   justify-content: center;
   align-items: flex-start;
@@ -34,7 +34,7 @@ html, body {
   max-width: 80%; 
   margin: 0 auto;
   background: #fef8f1;
-  height: 73vh; /* Expande mais para baixo ocupando 90% da altura da viewport */
+  height: 75vh; /* Expande mais para baixo ocupando 90% da altura da viewport */
   padding: 0 1vw; /* <-- adiciona espaço invisível nas laterais para o "scale" caber */
 }
 

@@ -49,6 +49,7 @@ import { MatNativeDateModule } from '@angular/material/core'; // Adicionado
 import { VendaCreateComponent } from './component/venda/venda-create/venda-create.component';
 import { VendaCrudComponent } from './views/venda-crud/venda-crud.component';
 import { VendaReadComponent } from './component/venda/venda-read/venda-read.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { VendaReadComponent } from './component/venda/venda-read/venda-read.comp
     MatSelectModule,               // Adicionado
     MatDatepickerModule,           // Adicionado
     MatNativeDateModule,          // Adicionado
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Cliente } from '../cliente.model';
 import { ClienteService } from '../cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http'; // para buscar na API ViaCEP
 
 @Component({
   selector: 'app-cliente-update',
@@ -11,9 +12,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ClienteUpdateComponent {
   cliente!: Cliente;
 
-  constructor(private clienteService: ClienteService,
+  constructor(
+    private clienteService: ClienteService,
     private router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     const cliId = this.route.snapshot.paramMap.get('cliId');
@@ -22,20 +26,32 @@ export class ClienteUpdateComponent {
         this.cliente = cliente;
       });
     } else {
-      // Caso o cliId seja null, pode redirecionar ou mostrar erro
       this.router.navigate(['/clientes']);
     }
   }
 
+  // Busca endereço pelo CEP
+  buscarEndereco(): void {
+    const cep = this.cliente.endCep?.replace(/\D/g, '');
+    if (cep && cep.length === 8) {
+      this.http.get(`https://viacep.com.br/ws/${cep}/json/`).subscribe((dados: any) => {
+        if (!dados.erro) {
+          this.cliente.endRua = dados.logradouro;
+          this.cliente.endCidade = dados.localidade;
+          this.cliente.endEstado = dados.uf;
+        }
+      });
+    }
+  }
+
   updateCliente(): void {
-    this.cliente.cliCpf = this.cliente.cliCpf.replace(/\D/g, ''); // remove pontos e traço
     this.clienteService.updateCliente(this.cliente).subscribe(() => {
-      this.clienteService.showMessage('Produto atualizado com sucesso!')
-      this.router.navigate(['/clientes'])
-    })
+      this.clienteService.showMessage('Cliente atualizado com sucesso!');
+      this.router.navigate(['/clientes']);
+    });
   }
 
   cancel(): void {
-    this.router.navigate(['/clientes'])
+    this.router.navigate(['/clientes']);
   }
 }

@@ -12,21 +12,23 @@ import { Router } from '@angular/router';
   templateUrl: './venda-create.component.html',
   styleUrls: ['./venda-create.component.css']
 })
-export class VendaCreateComponent implements OnInit{
+export class VendaCreateComponent implements OnInit {
 
   vendaForm!: FormGroup;
-  products: Product[]=[];
+  products: Product[] = [];
 
-  constructor( private fb: FormBuilder,
-               private productService: ProductService,
-               private snackBar: MatSnackBar,
-               private router: Router,
-               private vendaService: VendaService) { }
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private vendaService: VendaService
+  ) { }
 
   generateVendaCodigo(): string {
-  const codigo = Math.floor(Math.random() * 1000000);
-  return codigo.toString().padStart(6, '0');
-}
+    const codigo = Math.floor(Math.random() * 1000000);
+    return codigo.toString().padStart(6, '0');
+  }
 
   ngOnInit(): void {
     this.vendaForm = this.fb.group({
@@ -39,13 +41,13 @@ export class VendaCreateComponent implements OnInit{
 
     this.productService.read().subscribe({
       next: produtos => this.products = produtos,
-      error:  err => this.snackBar.open('Erro ao carregar produtos', 'X', {duration: 3000})
+      error: err => this.snackBar.open('Erro ao carregar produtos', 'X', { duration: 3000 })
     });
 
     this.addCompra();
   }
 
-  get compras(){
+  get compras() {
     return this.vendaForm.get('compras') as FormArray;
   }
 
@@ -61,12 +63,14 @@ export class VendaCreateComponent implements OnInit{
     this.compras.push(this.createCompra());
   }
 
-  cancel(): void {
-    this.router.navigate(['/vendas']);
+  removeCompra(index: number): void {
+    if (this.compras.length > 1) {
+      this.compras.removeAt(index);
+    }
   }
 
-  removeCompra(index: number): void {
-    this.compras.removeAt(index);
+  cancel(): void {
+    this.router.navigate(['/vendas']);
   }
 
   onProdutoChange(index: number): void {
@@ -74,7 +78,7 @@ export class VendaCreateComponent implements OnInit{
     const proId = compraGroup.get('proId')?.value;
 
     const produto = this.products.find(p => p.proId === proId);
-    if(produto) {
+    if (produto) {
       compraGroup.patchValue({
         compraPrecoVenda: produto.proPrecoVenda
       });
@@ -86,28 +90,34 @@ export class VendaCreateComponent implements OnInit{
   }
 
   onSubmit(): void {
-  const raw = this.vendaForm.value;
-
-  const vendaValorTotal = raw.compras.reduce(
-    (sum: number, item: Compra) => sum + item.compraQuantidade * item.compraPrecoVenda,
-    0
-  );
-
-  const venda: Venda = {
-    ...raw,
-    vendaValorTotal,
-    vendaData: new Date(raw.vendaData).toISOString() // LocalDateTime espera esse formato
-  };
-
-  this.vendaService.create(venda).subscribe({
-    next: () => {
-      this.snackBar.open('Venda criada com sucesso!', 'X', { duration: 3000 });
-      this.router.navigate(['/vendas']);
-    },
-    error: (err) => {
-      this.snackBar.open('Erro ao criar venda', 'X', { duration: 3000 });
-      console.error(err);
-      console.log(venda);
+    if (this.vendaForm.invalid) {
+      this.snackBar.open('Preencha todos os campos corretamente!', 'X', { duration: 3000 });
+      return;
     }
-  });
-}}
+
+    const raw = this.vendaForm.value;
+
+    const vendaValorTotal = raw.compras.reduce(
+      (sum: number, item: Compra) => sum + item.compraQuantidade * item.compraPrecoVenda,
+      0
+    );
+
+    const venda: Venda = {
+      ...raw,
+      vendaValorTotal,
+      vendaData: new Date(raw.vendaData).toISOString() // ISO string para backend
+    };
+
+    this.vendaService.create(venda).subscribe({
+      next: () => {
+        this.snackBar.open('Venda criada com sucesso!', 'X', { duration: 3000 });
+        this.router.navigate(['/vendas']);
+      },
+      error: (err) => {
+        this.snackBar.open('Erro ao criar venda', 'X', { duration: 3000 });
+        console.error(err);
+        console.log(venda);
+      }
+    });
+  }
+}

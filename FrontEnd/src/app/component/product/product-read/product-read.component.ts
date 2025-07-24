@@ -9,5 +9,14 @@ import { Product } from '../product.model';
 export class ProductReadComponent {
   @Input() products: Product[] = [];
 
-  displayedColumns = ['proId', 'proNome', 'proPrecoCusto', 'proPrecoVenda', 'action'];
+  displayedColumns: string[] = [
+    'proId',
+    'proNome',
+    'proQuantidadeEstoque',
+    'proCategoria',
+    'proMarca',
+    'proAtivo',
+    'forId',
+    'action'
+  ];
 }

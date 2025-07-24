@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormaPagamento } from '../formaPagamento.model';
-import { formaPagamentoService } from '../formaPagamento.service';
+import { FormaPagamentoService } from '../formaPagamento.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ export class FormaPagamentoDeleteComponent {
   formaPagamento!: FormaPagamento;
 
   constructor(
-    private formaPagamentoService: formaPagamentoService,
+    private formaPagamentoService: FormaPagamentoService,
     private router: Router,
     private route: ActivatedRoute) { }
 

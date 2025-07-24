@@ -1,14 +1,14 @@
 /* Card com altura máxima e rolagem interna */
 mat-card.venda-card {
-  width: 90%;               /* Alterado de 100% para 90% para ocupar a maior parte da tela, mas com margem lateral */
-  max-width: 900px;         /* Aumentado de 830px para 900px para telas grandes, limita o tamanho máximo */
-  min-width: 320px;         /* Novo: impede que o card fique muito estreito em telas pequenas (ex: celular) */
-  max-height: 75vh;         /* Mantido: limita altura a 75% da viewport para evitar overflow vertical */
-  padding: 3rem;            /* Alterado de 30px para 2rem para usar unidades relativas que escalam melhor */
+  width: 90%;
+  max-width: 800px;
+  max-height: calc(100vh - 160px); /* Evita cortar e mantém espaço */
+  padding: 30px;
   background-color: #fff;
   border-radius: 14px;
   box-shadow: 0 10px 22px rgba(92, 58, 26, 0.6);
-  margin: 1.5rem auto 2rem auto; /* Margem vertical em rem para escalabilidade e centralização horizontal */
+  margin: 0 auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }

@@ -1,33 +1,27 @@
-<!-- Card que contém o formulário para criar um novo contato -->
 <mat-card>
-    <!-- Título do card -->
-    <mat-card-title>Novo Contato</mat-card-title>
-
-    <!-- Formulário para entrada de dados do contato -->
+  <mat-card-title>Novo Contato</mat-card-title>
+  <div class="scrollable-form">
     <form>
-        <!-- Campo para inserir o telefone comercial -->
-        <mat-form-field>
-            <input matInput placeholder="Telefone comercial" [(ngModel)]="contato.conTelefoneComercial" name="conTelefoneComercial" required>
-        </mat-form-field>
+      <!-- Campos -->
+      <mat-form-field>
+        <input matInput placeholder="Telefone comercial" [(ngModel)]="contato.conTelefoneComercial" name="conTelefoneComercial" required>
+      </mat-form-field>
 
-        <!-- Campo para inserir o número de celular -->
-        <mat-form-field>
-            <input matInput placeholder="Celular" [(ngModel)]="contato.conCelular" name="conCelular" required>
-        </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Celular" [(ngModel)]="contato.conCelular" name="conCelular" required>
+      </mat-form-field>
 
-        <!-- Campo para inserir o e-mail -->
-        <mat-form-field>
-            <input matInput placeholder="E-mail" [(ngModel)]="contato.conEmail" name="conEmail" required>
-        </mat-form-field>
-    </form>
+      <mat-form-field>
+        <input matInput placeholder="E-mail" [(ngModel)]="contato.conEmail" name="conEmail" required>
+      </mat-form-field>
 
-    <!-- Botão para salvar o contato -->
-    <button mat-raised-button (click)="createContato()" color="primary">
+      <!-- Botões lado a lado -->
+      <button mat-raised-button color="primary" (click)="createContato()">
         Salvar
-    </button>
-   
-    <!-- Botão para cancelar a operação -->
-    <button mat-raised-button (click)="cancel()">
+      </button>
+      <button mat-stroked-button color="warn" (click)="cancel()">
         Cancelar
-    </button>
+      </button>
+    </form>
+  </div>
 </mat-card>

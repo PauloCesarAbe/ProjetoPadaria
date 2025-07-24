@@ -13,6 +13,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +33,7 @@ public class FornecedorService {
 
     public Fornecedor findById(Long id) {
         Optional<Fornecedor> obj = repository.findById(id);
-        return obj.orElseThrow(() ->
-                new ResourceNotFoundException(id));
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Fornecedor insert(Fornecedor obj) {
@@ -42,43 +43,56 @@ public class FornecedorService {
             enderecoRepository.saveAll(obj.getEnderecos());
             return obj;
         } catch (DataIntegrityViolationException e) {
-            throw new ValueBigForAtributeException(e
-                    .getMessage());
+            throw new ValueBigForAtributeException(e.getMessage());
         }
     }
 
-    public Fornecedor update(Long Id, FornecedorDto objDto) {
+    @Transactional
+    public Fornecedor update(Long id, FornecedorDto objDto) {
         try {
-            Fornecedor entity = findById(Id);
+            Fornecedor entity = findById(id);
 
-            //Atualiza os dados os fornecedor
+            // Atualiza os dados do fornecedor
             entity.setForRazaoSocial(objDto.getForRazaoSocial());
-            entity.setForRazaoSocial(objDto.getForRazaoSocial());
+            entity.setForNomeFantasia(objDto.getForNomeFantasia());
             entity.setForCnpj(objDto.getForCnpj());
 
-            //Atualiza os dados os fornecedor
-            Endereco endereco = entity.getEnderecos().get(0);
+            // Atualiza ou adiciona endereço
+            if (entity.getEnderecos() != null && !entity.getEnderecos().isEmpty()) {
+                Endereco endereco = entity.getEnderecos().get(0);
+                endereco.setEndRua(objDto.getEndRua());
+                endereco.setEndNumero(objDto.getEndNumero());
+                endereco.setEndCidade(objDto.getEndCidade());
+                endereco.setEndCep(objDto.getEndCep());
+                endereco.setEndEstado(objDto.getEndEstado());
+            } else {
+                Endereco novoEndereco = new Endereco(null, entity,
+                        objDto.getEndRua(), objDto.getEndNumero(),
+                        objDto.getEndCidade(), objDto.getEndCep(),
+                        objDto.getEndEstado());
+                entity.getEnderecos().add(novoEndereco);
+            }
 
-            //Assuindo que ha apenas um endereço por fornecedor
-            endereco.setEndRua(objDto.getEndRua());
-            endereco.setEndNumero(objDto.getEndNumero());
-            endereco.setEndCidade(objDto.getEndCidade());
-            endereco.setEndCep(objDto.getEndCep());
-            endereco.setEndEstado(objDto.getEndEstado());
+            // Atualiza ou adiciona contato
+            if (entity.getContatos() != null && !entity.getContatos().isEmpty()) {
+                Contato contato = entity.getContatos().get(0);
+                contato.setConCelular(objDto.getConCelular());
+                contato.setConTelefoneComercial(objDto.getConTelefoneComercial());
+                contato.setConEmail(objDto.getConEmail());
+            } else {
+                Contato novoContato = new Contato(null, entity,
+                        objDto.getConCelular(),
+                        objDto.getConTelefoneComercial(),
+                        objDto.getConEmail());
+                entity.getContatos().add(novoContato);
+            }
 
-            //Atualiza o contato
-            Contato contato = entity.getContatos().get(0);
-
-            //Assumindo que ha apenas um contato por fornecedor
-            contato.setConCelular(objDto.getConCelular());
-            contato.setConTelefoneComercial(objDto.getConTelefoneComercial());
-            contato.setConEmail(objDto.getConEmail());
-
-            //Salva as alterações
             repository.save(entity);
             return entity;
         } catch (DataIntegrityViolationException e) {
             throw new ValueBigForAtributeException(e.getMessage());
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("ID não encontrado: " + id);
         }
     }
 
@@ -91,11 +105,18 @@ public class FornecedorService {
     }
 
     public Fornecedor fromDTO(FornecedorDto objDto) {
-        Fornecedor fornec = new Fornecedor(null, objDto.getForNomeFantasia(), objDto.getForCnpj(), objDto.getForRazaoSocial());
+        Fornecedor fornec = new Fornecedor(null,
+                objDto.getForNomeFantasia(),
+                objDto.getForCnpj(),
+                objDto.getForRazaoSocial());
 
-        Endereco ender = new Endereco(null, fornec, objDto.getEndRua(), objDto.getEndNumero(), objDto.getEndCidade(), objDto.getEndCep(), objDto.getEndEstado());
+        Endereco ender = new Endereco(null, fornec,
+                objDto.getEndRua(), objDto.getEndNumero(),
+                objDto.getEndCidade(), objDto.getEndCep(),
+                objDto.getEndEstado());
 
-        Contato contato = new Contato(null, fornec, objDto.getConCelular(), objDto.getConTelefoneComercial(),
+        Contato contato = new Contato(null, fornec,
+                objDto.getConCelular(), objDto.getConTelefoneComercial(),
                 objDto.getConEmail());
 
         fornec.getEnderecos().add(ender);
@@ -107,29 +128,27 @@ public class FornecedorService {
     public FornecedorDto toNewDto(Fornecedor obj) {
         FornecedorDto dto = new FornecedorDto();
 
-// Mapeie os atributos comuns entre Fornecedor e FornecedorNewDTO
         dto.setForId(obj.getForId());
         dto.setForNomeFantasia(obj.getForNomeFantasia());
         dto.setForRazaoSocial(obj.getForRazaoSocial());
         dto.setForCnpj(obj.getForCnpj());
 
-// Atributos específicos de Endereco
-    if (!obj.getEnderecos().isEmpty()) {
-        Endereco endereco = obj.getEnderecos().get(0);
-        dto.setEndRua(endereco.getEndRua());
-        dto.setEndNumero(endereco.getEndNumero());
-        dto.setEndCidade(endereco.getEndCidade());
-        dto.setEndCep(endereco.getEndCep());
-        dto.setEndEstado(endereco.getEndEstado());
-    }
+        if (!obj.getEnderecos().isEmpty()) {
+            Endereco endereco = obj.getEnderecos().get(0);
+            dto.setEndRua(endereco.getEndRua());
+            dto.setEndNumero(endereco.getEndNumero());
+            dto.setEndCidade(endereco.getEndCidade());
+            dto.setEndCep(endereco.getEndCep());
+            dto.setEndEstado(endereco.getEndEstado());
+        }
 
-// Atributos específicos de Contato
-    if (!obj.getContatos().isEmpty()) {
-        Contato contato = obj.getContatos().get(0);
-        dto.setConCelular(contato.getConCelular());
-        dto.setConTelefoneComercial(contato.getConTelefoneComercial());
-        dto.setConEmail(contato.getConEmail());
-    }
+        if (!obj.getContatos().isEmpty()) {
+            Contato contato = obj.getContatos().get(0);
+            dto.setConCelular(contato.getConCelular());
+            dto.setConTelefoneComercial(contato.getConTelefoneComercial());
+            dto.setConEmail(contato.getConEmail());
+        }
+
         return dto;
     }
 }

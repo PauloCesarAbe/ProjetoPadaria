@@ -9,7 +9,8 @@ export interface Product {
     proCodigoBarras: string;
     proMarca: string;
     proUnidadeMedida: string;
-    proAtivo: boolean;
+    proAtivo: string;
     proDataCadastro: string;
     proDataAtualizacao: string;
+    forId: number;
 }

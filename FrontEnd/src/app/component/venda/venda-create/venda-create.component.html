@@ -34,11 +34,13 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput type="number" placeholder="Quantidade" formControlName="compraQuantidade" min="1" required>
+            <mat-label>Quantidade</mat-label>
+            <input matInput type="number" formControlName="compraQuantidade" min="1">
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput type="number" placeholder="Preço de Venda (R$)" formControlName="compraPrecoVenda" step="0.01" min="0" required>
+            <mat-label>Preço de Venda (R$)</mat-label>
+            <input matInput type="number" formControlName="compraPrecoVenda" step="0.01" min="0">
           </mat-form-field>
 
           <div class="botoes-produto">

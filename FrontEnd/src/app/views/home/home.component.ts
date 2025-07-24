@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/component/product/product.service';
 import { ClienteService } from 'src/app/component/cliente/cliente.service';
 import { contatoService } from 'src/app/component/contato/contato.service';
-import { formaPagamentoService } from 'src/app/component/formaPagamento/formaPagamento.service';
+import { FormaPagamentoService } from 'src/app/component/formaPagamento/formaPagamento.service';
 import { VendaService } from 'src/app/component/venda/venda.service';
 import { FornecedorService } from 'src/app/component/fornecedor/fornecedor.service';
 
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit{
               public clienteService: ClienteService, 
               public contatoService: contatoService,
               public vendaService: VendaService,
-              public formaPagamentoService: formaPagamentoService,
+              public formaPagamentoService: FormaPagamentoService,
               public fornecedorService: FornecedorService){}
   productCount: number = 0;
   clienteCount: number = 0;
