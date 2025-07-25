@@ -38,7 +38,7 @@ form {
   flex-direction: column;
 }
 
-/* Botões */
+/* Botões padrão */
 button {
   background: linear-gradient(90deg, #8a6245 250px, #815b40);
   border: none;
@@ -121,6 +121,23 @@ button.mat-raised-button:hover {
   margin-bottom: 30px; /* distância maior para separar do próximo bloco */
   display: flex;
   gap: 15px;
+}
+
+/* Botões finais lado a lado e maiores */
+.botoes-finais {
+  display: flex;
+  gap: 20px;
+  justify-content: center; /* centraliza os botões */
+  margin-top: 20px;
+}
+
+.botoes-finais button {
+  flex: 1;
+  max-width: 250px;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  border-radius: 18px;
+  width: auto;
 }
 
 /* Responsividade para telas médias e pequenas */

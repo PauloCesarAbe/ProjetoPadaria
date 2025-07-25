@@ -2,35 +2,63 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Venda } from 'src/app/component/venda/venda.model';
 import { VendaService } from 'src/app/component/venda/venda.service';
+import { Cliente } from 'src/app/component/cliente/cliente.model';
+import { ClienteService } from 'src/app/component/cliente/cliente.service';
 
 @Component({
   selector: 'app-venda-crud',
   templateUrl: './venda-crud.component.html',
   styleUrls: ['./venda-crud.component.css']
 })
-export class VendaCrudComponent implements OnInit{
+export class VendaCrudComponent implements OnInit {
 
   allVenda: Venda[] = [];
-  searchTerm: string = '';
   vendaFilter: Venda[] = [];
+  searchTerm: string = '';
 
-  constructor(private router: Router, private vendaService: VendaService) {}
+  clientesMap = new Map<number, Cliente>();
+
+  constructor(
+    private router: Router,
+    private vendaService: VendaService,
+    private clienteService: ClienteService
+  ) {}
+
+  ngOnInit(): void {
+    // Carrega todas as vendas
+    this.vendaService.read().subscribe((venda: Venda[]) => {
+      this.allVenda = venda;
+      this.vendaFilter = venda; // mostra tudo inicialmente
+    });
+
+    // Carrega todos os clientes para o Map
+    this.clienteService.readClientes().subscribe({
+      next: (clientes: Cliente[]) => {
+        clientes.forEach(c => this.clientesMap.set(c.cliId!, c));
+      },
+      error: () => {
+        console.error('Erro ao carregar clientes');
+      }
+    });
+  }
 
   navigateToVendaCreate(): void {
-      this.router.navigate(['/vendas/create']);
-    }
+    this.router.navigate(['/vendas/create']);
+  }
 
-    ngOnInit(): void {
-      this.vendaService.read().subscribe((venda: Venda[]) => {
-       this.allVenda = venda;
-     })
-    }
+  filterVendas(): void {
+    const filter = this.searchTerm.toLowerCase();
 
-    filterVendas(): void {
-      const filter = this.searchTerm.toLocaleLowerCase();
-      this.vendaFilter = this.allVenda.filter(f => 
-        f.cliId?.toString().includes(filter) ||
-        f.vendaCodigo.toString().includes(filter)
+    this.vendaFilter = this.allVenda.filter(v => {
+      const clienteNome = this.clientesMap.get(v.cliId)?.cliNome?.toLowerCase() || '';
+      const vendaCodigo = v.vendaCodigo?.toString().toLowerCase() || '';
+      const cliId = v.cliId?.toString().toLowerCase() || '';
+
+      return (
+        clienteNome.includes(filter) ||
+        vendaCodigo.includes(filter) ||
+        cliId.includes(filter)
       );
-    }
+    });
+  }
 }

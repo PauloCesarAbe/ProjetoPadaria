@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.model';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
+import { FornecedorService } from '../../fornecedor/fornecedor.service';
+import { Fornecedor } from '../../fornecedor/fornecedor.model';
 
 @Component({
   selector: 'app-product-create',
@@ -10,10 +12,10 @@ import { Router } from '@angular/router';
 })
 export class ProductCreateComponent implements OnInit {
   product: Product = {
-    proNome: '', // Nome do produto
+    proNome: '',
     proDescricao: '',
-    proPrecoCusto: 0, // Preço de custo inicial
-    proPrecoVenda: 0, // Preço de venda inicial
+    proPrecoCusto: 0,
+    proPrecoVenda: 0,
     proQuantidadeEstoque: 0,
     proCategoria: '',
     proCodigoBarras: '',
@@ -25,20 +27,27 @@ export class ProductCreateComponent implements OnInit {
     forId: 0
   };
 
-  // Injeção de dependências: ProductService e Router
-  constructor(private productService: ProductService, private router: Router) {}
+  fornecedores: Fornecedor[] = []; // <--- AQUI: declarar a propriedade
 
-  ngOnInit(): void {}
+  constructor(
+    private productService: ProductService,
+    private fornecedorService: FornecedorService, // <--- AQUI: injetar o serviço
+    private router: Router
+  ) {}
 
-  // Método para criar um produto
-  createProduct(): void {
-    this.productService.create(this.product).subscribe(() => {
-      this.productService.showMessage('Produto criado!'); // Exibe mensagem de sucesso
-      this.router.navigate(['/products']); // Redireciona para a lista de produtos
+  ngOnInit(): void {
+    this.fornecedorService.readFornecedor().subscribe((fornecedores: Fornecedor[]) => {
+      this.fornecedores = fornecedores;
     });
   }
 
-  // Método para cancelar a criação e voltar à lista de produtos
+  createProduct(): void {
+    this.productService.create(this.product).subscribe(() => {
+      this.productService.showMessage('Produto criado!');
+      this.router.navigate(['/products']);
+    });
+  }
+
   cancel(): void {
     this.router.navigate(['/products']);
   }

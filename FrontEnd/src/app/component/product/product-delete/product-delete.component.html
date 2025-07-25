@@ -65,8 +65,13 @@
 
       <mat-form-field class="produto-campo">
         <mat-label>Fornecedor</mat-label>
-        <input matInput [(ngModel)]="product.forId" name="fornecedorId" disabled>
+        <mat-select [(ngModel)]="product.forId" name="forId">
+          <mat-option *ngFor="let fornecedor of fornecedores" [value]="fornecedor.forId" disabled>
+            {{ fornecedor.forNomeFantasia }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
+
 
       <div class="produto-botoes">
         <button mat-raised-button color="primary" class="produto-botao" (click)="deleteProduct()" disabled>
