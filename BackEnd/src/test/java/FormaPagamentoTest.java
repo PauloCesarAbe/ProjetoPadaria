@@ -25,24 +25,24 @@ class FormaPagamentoTest {
     void testConstrutorEGetters() {
         assertEquals(1L, formaPagamento.getFpgId());
         assertEquals("Cartão de Crédito", formaPagamento.getFpgDescricao());
-        assertEquals("S", formaPagamento.getFpgAtivo());
+        assertEquals("S", formaPagamento.getFpgTipo());
         assertTrue(formaPagamento.getFpgPermiteParcelamento());
-        assertEquals(12, formaPagamento.getFpgNumeroMaximoParcelas());
+        assertEquals(12, formaPagamento.getFpgNumMaxParcelas());
         assertEquals(new BigDecimal("1.50"), formaPagamento.getFpgTaxaAdicional());
     }
 
     @Test
     void testSettersValidos() {
         formaPagamento.setFpgDescricao("Dinheiro");
-        formaPagamento.setFpgAtivo("N");
+        formaPagamento.setFpgTipo("N");
         formaPagamento.setFpgPermiteParcelamento(false);
-        formaPagamento.setFpgNumeroMaximoParcelas(6);
+        formaPagamento.setFpgNumMaxParcelas(6);
         formaPagamento.setFpgTaxaAdicional(new BigDecimal("0.75"));
 
         assertEquals("Dinheiro", formaPagamento.getFpgDescricao());
-        assertEquals("N", formaPagamento.getFpgAtivo());
+        assertEquals("N", formaPagamento.getFpgTipo());
         assertFalse(formaPagamento.getFpgPermiteParcelamento());
-        assertEquals(6, formaPagamento.getFpgNumeroMaximoParcelas());
+        assertEquals(6, formaPagamento.getFpgNumMaxParcelas());
         assertEquals(new BigDecimal("0.75"), formaPagamento.getFpgTaxaAdicional());
     }
 
@@ -57,22 +57,22 @@ class FormaPagamentoTest {
     }
 
     @Test
-    void testFpgAtivoNulo() {
-        formaPagamento.setFpgAtivo(null);
+    void testFpgTipoNulo() {
+        formaPagamento.setFpgTipo(null);
         Set<ConstraintViolation<FormaPagamento>> violations = validator.validate(formaPagamento);
         assertFalse(violations.isEmpty());
-        assertEquals("Status é obrigatório", violations.stream()
-                .filter(v -> v.getPropertyPath().toString().equals("fpgAtivo"))
+        assertEquals("Tipo é obrigatório", violations.stream()
+                .filter(v -> v.getPropertyPath().toString().equals("fpgTipo"))
                 .findFirst().get().getMessage());
     }
 
     @Test
-    void testFpgAtivoInvalido() {
-        formaPagamento.setFpgAtivo("X");
+    void testFpgTipoInvalido() {
+        formaPagamento.setFpgTipo("X");
         Set<ConstraintViolation<FormaPagamento>> violations = validator.validate(formaPagamento);
         assertFalse(violations.isEmpty());
-        assertEquals("Status inválido (use S ou N)", violations.stream()
-                .filter(v -> v.getPropertyPath().toString().equals("fpgAtivo"))
+        assertEquals("Tipo inválido (use S ou N)", violations.stream()
+                .filter(v -> v.getPropertyPath().toString().equals("fpgTipo"))
                 .findFirst().get().getMessage());
     }
 
@@ -87,22 +87,22 @@ class FormaPagamentoTest {
     }
 
     @Test
-    void testFpgNumeroMaximoParcelasNulo() {
-        formaPagamento.setFpgNumeroMaximoParcelas(null);
+    void testFpgNumMaxParcelasNulo() {
+        formaPagamento.setFpgNumMaxParcelas(null);
         Set<ConstraintViolation<FormaPagamento>> violations = validator.validate(formaPagamento);
         assertFalse(violations.isEmpty());
         assertEquals("Número máximo de parcelas é obrigatório", violations.stream()
-                .filter(v -> v.getPropertyPath().toString().equals("fpgNumeroMaximoParcelas"))
+                .filter(v -> v.getPropertyPath().toString().equals("fpgNumMaxParcelas"))
                 .findFirst().get().getMessage());
     }
 
     @Test
-    void testFpgNumeroMaximoParcelasInvalido() {
-        formaPagamento.setFpgNumeroMaximoParcelas(0);
+    void testFpgNumMaxParcelasInvalido() {
+        formaPagamento.setFpgNumMaxParcelas(0);
         Set<ConstraintViolation<FormaPagamento>> violations = validator.validate(formaPagamento);
         assertFalse(violations.isEmpty());
         assertEquals("Número máximo de parcelas deve ser pelo menos 1", violations.stream()
-                .filter(v -> v.getPropertyPath().toString().equals("fpgNumeroMaximoParcelas"))
+                .filter(v -> v.getPropertyPath().toString().equals("fpgNumMaxParcelas"))
                 .findFirst().get().getMessage());
     }
 
